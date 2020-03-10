@@ -6,10 +6,7 @@ public class Player : MonoBehaviour
 {
     public int Coins = 0;
     
-    private ThisGameData thisGameData;
-    
     public void Start(){
-        thisGameData = gameObject.GetComponent<ThisGameData>();
         LoadPlayer();
     }
     
@@ -23,14 +20,4 @@ public class Player : MonoBehaviour
             Coins = data.Coins;
         else SavePlayer();
     }
-    
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Coins")
-        {
-            thisGameData.coinsCollected += collision.gameObject.GetComponent<CoinData>().CoinValue;
-            Destroy(collision.gameObject);
-        }
-    }
-    
 }
