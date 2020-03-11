@@ -84,6 +84,25 @@ public class GameManagerBingo : MonoBehaviour
             ready = true;
             contextManager.ReadyButton.GetComponent<Button>().interactable = true;
         }
+        
         return nextCardNum++;
     }
+    
+    public void StartGame(){
+        Reset();
+        
+        for (int i = 1; i <= 5; i++){
+            horizontalsList.Add(Instantiate(Horizontals, GamePanelObject.transform));
+        }
+        int loc = 0;
+        for (int i = 0; i < 5; i++){
+            for (int j=1; j<=5 ; j++){
+                GameObject card = Instantiate(CardPrefab, horizontalsList[i].transform);
+                
+                card.GetComponent<CardNumGetter>().id = idLocation[loc++];
+                card.GetComponent<CardNumGetter>().gameManagerBingo = this;
+            }
+        }
+    }
+    
 }

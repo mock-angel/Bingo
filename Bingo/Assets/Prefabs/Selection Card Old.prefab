@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: -2650631692527074070}
   - component: {fileID: 1872214903516697262}
   m_Layer: 5
-  m_Name: Card 0
+  m_Name: Selection Card Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,7 +178,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.76380515, g: 1, b: 0, a: 0.5019608}
+    m_DisabledColor: {r: 0.99215686, g: 0.49378526, b: 0.07058824, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
