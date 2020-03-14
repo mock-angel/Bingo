@@ -89,7 +89,7 @@ public class GameManagerBingo : MonoBehaviour
     }
     
     public void StartGame(){
-        Reset();
+        DestroyHorizontals();
         
         for (int i = 1; i <= 5; i++){
             horizontalsList.Add(Instantiate(Horizontals, GamePanelObject.transform));
@@ -99,10 +99,15 @@ public class GameManagerBingo : MonoBehaviour
             for (int j=1; j<=5 ; j++){
                 GameObject card = Instantiate(CardPrefab, horizontalsList[i].transform);
                 
-                card.GetComponent<CardNumGetter>().id = idLocation[loc++];
-                card.GetComponent<CardNumGetter>().gameManagerBingo = this;
+                card.GetComponent<CardNumPlayer>().id = idLocation[loc++];
+                card.GetComponent<CardNumPlayer>().gameManagerBingo = this;
+                card.GetComponent<CardNumPlayer>().ApplyText();
             }
         }
+    }
+    
+    public void CheckBingo(){
+        
     }
     
 }

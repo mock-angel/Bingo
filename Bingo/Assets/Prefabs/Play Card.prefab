@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 432191352332517421}
   - component: {fileID: 432191352332517420}
   - component: {fileID: -2650631692527074070}
-  - component: {fileID: 1872214903516697262}
+  - component: {fileID: 5385784985918589295}
   m_Layer: 5
   m_Name: Play Card
   m_TagString: Untagged
@@ -197,8 +197,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1872214903516697262}
-        m_MethodName: AssignCardNum
+      - m_Target: {fileID: 5385784985918589295}
+        m_MethodName: ClickedOnce
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -234,7 +234,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   m_AssetId: 
---- !u!114 &1872214903516697262
+--- !u!114 &5385784985918589295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 432191352332517422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e913ebf3ec346ff6d8c39a069162b38c, type: 3}
+  m_Script: {fileID: 11500000, guid: 234e788e7ec62a85f9784ea58c4bfef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0

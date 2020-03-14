@@ -5,9 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    public int Coins;
-//    public int LevelsReached;
+    public string DisplayName;
     public PlayerData(Player player){
-        Coins = player.Coins;
+        DisplayName = player.DisplayName;
     }
 }
