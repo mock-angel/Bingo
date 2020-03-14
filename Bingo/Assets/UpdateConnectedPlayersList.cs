@@ -15,11 +15,8 @@ public class UpdateConnectedPlayersList : MonoBehaviour
     void FixedUpdate()
     {
         string connectedListString = "";
-        int children = AllPlayersObj.transform.childCount;
-        
         foreach (Transform child in AllPlayersObj.transform)
         {
-        //              child.gameObject.SetActive(false);
             ClientPlayerScript clientPlayerScript = child.gameObject.GetComponent<ClientPlayerScript>();
             connectedListString += clientPlayerScript.playerName + "\n";
         }

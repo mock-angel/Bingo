@@ -8,6 +8,7 @@ public class ClientPlayerScript : NetworkBehaviour
 //    public List<PlayerNetworkData> playerDataObj;
     public string playerName;
     public int selfId;
+    public bool ready;
     
     public override void OnStartLocalPlayer(){
         base.OnStartLocalPlayer();
