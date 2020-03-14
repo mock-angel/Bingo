@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7877482807161955282}
   m_Layer: 0
   m_Name: ClientPlayerDataContainer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,4 +61,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  playerName: 
   selfId: 0

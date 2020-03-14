@@ -12,6 +12,8 @@ public class ClientPlayerScript : NetworkBehaviour
     public override void OnStartLocalPlayer(){
         base.OnStartLocalPlayer();
         ClientSetPlayerName(Player.instance.DisplayName);
+        
+        CmdChangeParent();
     }
     
     //script on client side.
@@ -37,9 +39,28 @@ public class ClientPlayerScript : NetworkBehaviour
         NetworkIdentity identity = GetComponent<NetworkIdentity>();
         RpcAssignClientID(selfId);
     }
-    
+    [Command]
+    public void CmdChangeParent(){
+        transform.parent = ConnectedPlayersStaticScript.instance.transform;
+        
+//        GameObject[] PlayerObjects = GameObject.FindGameObjectsWithTag("Player");
+//        foreach (GameObject singlePlayer in PlayerObjects){
+//            singlePlayer.transform.parent = ConnectedPlayersStaticScript.instance.transform;
+//        }
+//        
+        //Instruct all clients to change parent as well.
+        RpcChangeParent();
+    }
     [ClientRpc]
     public void RpcAssignClientID(int id){
         selfId = id;
+    }
+    
+    [ClientRpc]
+    public void RpcChangeParent(){
+        GameObject[] PlayerObjects = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < PlayerObjects.Length; i++){//GameObject singlePlayer in PlayerObjects){
+            PlayerObjects[i].transform.parent = ConnectedPlayersStaticScript.instance.transform;
+        }
     }
 }
