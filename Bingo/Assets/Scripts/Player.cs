@@ -8,7 +8,7 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     public string DisplayName;
-    public Player instance;
+    public static Player instance;
     
     public TextMeshProUGUI displayText;
     
