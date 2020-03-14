@@ -9,6 +9,11 @@ public class ClientPlayerScript : NetworkBehaviour
     public string playerName;
     public int selfId;
     
+    public override void OnStartLocalPlayer(){
+        base.OnStartLocalPlayer();
+        ClientSetPlayerName(Player.instance.DisplayName);
+    }
+    
     //script on client side.
     public void SetClientID(){
         CmdAssignClientID();
