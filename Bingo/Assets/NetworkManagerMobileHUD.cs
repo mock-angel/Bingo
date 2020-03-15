@@ -2,6 +2,7 @@
 // confusion if someone accidentally presses one.
 using System.ComponentModel;
 using UnityEngine;
+using TMPro;
 
 namespace Mirror
 {
@@ -31,17 +32,110 @@ namespace Mirror
         /// The vertical offset in pixels to draw the HUD runtime GUI at.
         /// </summary>
         public int offsetY;
-
+        
+        public GUIStyle customButton;
+        public GUIStyle customLabel;
+        public GUIStyle customTextField;
+        
+        public GameObject ConnectionSelectionPanel;
+        public GameObject ConnectingPanel;
+        public GameObject ConnectedPanel;
+        
+        public TextMeshProUGUI ConnectingText;
+        public TextMeshProUGUI ConnectedText;
+        public TextMeshProUGUI IPtext;
+        
+        
+        void Start()
+        {
+            customButton = new GUIStyle("button");
+            customButton.fontSize = 30;
+            
+            customLabel = new GUIStyle("label");
+            customLabel.fontSize = 25;
+            
+            customTextField = new GUIStyle("textfield");
+            customTextField.fontSize = 30;
+        }
+        
         void Awake()
         {
             manager = GetComponent<NetworkManager>();
         }
+        
+        void FixedUpdate(){
+//            return;
+            manager.networkAddress = IPtext.text + " ";
+            
+            string str = "";
+            if (!NetworkClient.isConnected && !NetworkServer.active)
+            {
+            
+//                ConnectingPanel.SetActive(false);
+                if (!NetworkClient.active)
+                {
+                    ConnectingPanel.SetActive(false);
+                    ConnectionSelectionPanel.SetActive(true);
+                }
+                else
+                {
+                    ConnectingText.text = "Connecting to " + manager.networkAddress + "..";
+                    
+                    ConnectionSelectionPanel.SetActive(false);
+                    ConnectingPanel.SetActive(true);
+//                    manager.networkAddress = IPtext.text;
+                }
+            }
+            else
+            {
+                ConnectingPanel.SetActive(false);
+                ConnectionSelectionPanel.SetActive(false);
+                
+                if (NetworkServer.active)
+                {
+                    str += "Server: active. Transport: " + Transport.activeTransport + "\n";
+                }
+                
+                if (NetworkClient.isConnected)
+                {
+                    str += "Client: address=" + manager.networkAddress;
+                }
+                
+                ConnectedText.text = str;
+            }
+            
+            // client ready
+            if (NetworkClient.isConnected && !ClientScene.ready)
+            {
+//                if (GUILayout.Button("Client Ready", customButton, GUILayout.Height(100)))
+//                {
+//                    ClientScene.Ready(NetworkClient.connection);
 
+//                    if (ClientScene.localPlayer == null)
+//                    {
+//                        ClientScene.AddPlayer();
+//                    }
+//                }
+            }
+
+            // stop
+            if (NetworkServer.active || NetworkClient.isConnected)
+            {
+                ConnectedPanel.SetActive(true);
+            }
+            else ConnectedPanel.SetActive(false);
+        }
+        
+        public void IPValueUpdate(){
+//            manager.networkAddress = IPtext.text;
+        }
+        
         void OnGUI()
         {
             if (!showGUI)
                 return;
-
+            return;
+            
             GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, 215*1.9f, 9999));
             if (!NetworkClient.isConnected && !NetworkServer.active)
             {
@@ -50,7 +144,7 @@ namespace Mirror
                     // LAN Host
                     if (Application.platform != RuntimePlatform.WebGLPlayer)
                     {
-                        if (GUILayout.Button("LAN Host"))
+                        if (GUILayout.Button("LAN Host", customButton, GUILayout.Height(100)))
                         {
                             manager.StartHost();
                         }
@@ -58,29 +152,30 @@ namespace Mirror
 
                     // LAN Client + IP
                     GUILayout.BeginHorizontal();
-                    if (GUILayout.Button("LAN Client"))
+                    if (GUILayout.Button("LAN Client", customButton, GUILayout.Height(100)))
                     {
                         manager.StartClient();
                     }
-                    manager.networkAddress = GUILayout.TextField(manager.networkAddress);
+                    manager.networkAddress = GUILayout.TextField(manager.networkAddress, customTextField,  GUILayout.Height(100));
+                    
                     GUILayout.EndHorizontal();
 
-                    // LAN Server Only
-                    if (Application.platform == RuntimePlatform.WebGLPlayer)
-                    {
-                        // cant be a server in webgl build
-                        GUILayout.Box("(  WebGL cannot be server  )");
-                    }
-                    else
-                    {
-                        if (GUILayout.Button("LAN Server Only")) manager.StartServer();
-                    }
+//                    // LAN Server Only
+//                    if (Application.platform == RuntimePlatform.WebGLPlayer)
+//                    {
+//                        // cant be a server in webgl build
+//                        GUILayout.Box("(  WebGL cannot be server  )", GUILayout.Height(30));
+//                    }
+//                    else
+//                    {
+//                        if (GUILayout.Button("LAN Server Only", customButton, GUILayout.Height(100))) manager.StartServer();
+//                    }
                 }
                 else
                 {
                     // Connecting
-                    GUILayout.Label("Connecting to " + manager.networkAddress + "..");
-                    if (GUILayout.Button("Cancel Connection Attempt"))
+                    GUILayout.Label("Connecting to " + manager.networkAddress + "..", customLabel, GUILayout.Height(40));
+                    if (GUILayout.Button("Cancel Connection Attempt", customButton, GUILayout.Height(100)))
                     {
                         manager.StopClient();
                     }
@@ -91,32 +186,32 @@ namespace Mirror
                 // server / client status message
                 if (NetworkServer.active)
                 {
-                    GUILayout.Label("Server: active. Transport: " + Transport.activeTransport);
+                    GUILayout.Label("Server: active. Transport: " + Transport.activeTransport, customLabel, GUILayout.Height(40));
                 }
                 if (NetworkClient.isConnected)
                 {
-                    GUILayout.Label("Client: address=" + manager.networkAddress);
+                    GUILayout.Label("Client: address=" + manager.networkAddress, customLabel, GUILayout.Height(40));
                 }
             }
 
             // client ready
-            if (NetworkClient.isConnected && !ClientScene.ready)
-            {
-                if (GUILayout.Button("Client Ready"))
-                {
-                    ClientScene.Ready(NetworkClient.connection);
+//            if (NetworkClient.isConnected && !ClientScene.ready)
+//            {
+//                if (GUILayout.Button("Client Ready", customButton, GUILayout.Height(100)))
+//                {
+//                    ClientScene.Ready(NetworkClient.connection);
 
-                    if (ClientScene.localPlayer == null)
-                    {
-                        ClientScene.AddPlayer();
-                    }
-                }
-            }
+//                    if (ClientScene.localPlayer == null)
+//                    {
+//                        ClientScene.AddPlayer();
+//                    }
+//                }
+//            }
 
             // stop
             if (NetworkServer.active || NetworkClient.isConnected)
             {
-                if (GUILayout.Button("Stop"))
+                if (GUILayout.Button("Stop", customButton, GUILayout.Height(100)))
                 {
                     manager.StopHost();
                 }
