@@ -34,11 +34,12 @@ public class GameManagerBingo : MonoBehaviour
     public int currentBingoCount = 0;
     
     private GameObject BingoHorizontal;
-    
+    private List<GameObject> bingoCardList;
     void Start(){
         horizontalsList = new List<GameObject>();
         idLocation = new List<int>();
         Cards = new List<GameObject>();
+        bingoCardList = new List<GameObject>();
         
         CreateEmptyCards();
         scriptInstance = this;
@@ -95,6 +96,10 @@ public class GameManagerBingo : MonoBehaviour
         SetGamePlayEnable(true);
         gamePlayEnabled = true;
         
+        bingoCardList.Clear();
+        Destroy(BingoHorizontal);
+        BingoHorizontal = Instantiate(Horizontals, GamePanelObject.transform);
+        
         for (int i = 1; i <= 5; i++){
             horizontalsList.Add(Instantiate(Horizontals, GamePanelObject.transform));
         }
@@ -107,6 +112,15 @@ public class GameManagerBingo : MonoBehaviour
                 card.GetComponent<CardNumGetter>().id = id++;
                 card.GetComponent<CardNumGetter>().gameManagerBingo = this;
             }
+        }
+        
+        List<string> listBingo = new List<string>(){"B", "I", "N", "G", "O"};
+        
+        //Now add bingo cards;
+        for(int i = 0; i < listBingo.Count; i++){
+            GameObject bingoCard = Instantiate(BingoCardPrefab, BingoHorizontal.transform);
+            bingoCard.GetComponent<BingoNum>().text.text = listBingo[i];
+            bingoCardList.Add(bingoCard);
         }
     }
     
@@ -129,6 +143,8 @@ public class GameManagerBingo : MonoBehaviour
         SetGamePlayEnable(false);
         gamePlayEnabled = false;
         
+        bingoCardList.Clear();
+        Destroy(BingoHorizontal);
         BingoHorizontal = Instantiate(Horizontals, GamePanelObject.transform);
         for (int i = 1; i <= 5; i++){
             horizontalsList.Add(Instantiate(Horizontals, GamePanelObject.transform));
@@ -154,6 +170,7 @@ public class GameManagerBingo : MonoBehaviour
         for(int i = 0; i < listBingo.Count; i++){
             GameObject bingoCard = Instantiate(BingoCardPrefab, BingoHorizontal.transform);
             bingoCard.GetComponent<BingoNum>().text.text = listBingo[i];
+            bingoCardList.Add(bingoCard);
         }
     }
     
