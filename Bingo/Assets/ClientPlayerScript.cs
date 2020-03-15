@@ -24,7 +24,9 @@ public class ClientPlayerScript : NetworkBehaviour
     
     public bool gameStarted = false;
     
+    [SyncVar]
     public bool gameWon = false;
+    [SyncVar]
     public int winOrder = 0;
     
     public override void OnStartLocalPlayer(){
@@ -80,6 +82,14 @@ public class ClientPlayerScript : NetworkBehaviour
     public void CmdTurnFinished(int numberSelected){
         RpcTurnFinished(numberSelected);
         ServerGameManagerScirpt.scriptInstance.TurnFinished(numberSelected);
+    }
+    
+    [Command]
+    public void CmdGameWon(){
+        if(gameWon) return;
+        
+        gameWon = true;
+        winOrder = ++ServerGameManagerScirpt.scriptInstance.winnersCount;
     }
     
     [ClientRpc]

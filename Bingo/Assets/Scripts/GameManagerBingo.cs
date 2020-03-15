@@ -270,6 +270,18 @@ public class GameManagerBingo : MonoBehaviour
         if (bingoCount>5) bingoCount = 5;
         
         currentBingoCount = bingoCount;
+        
+        for(int i = 0; i < bingoCount; i++){
+            bingoCardList[i].GetComponent<Button>().interactable = false;
+        }
+        
+        for(int i = bingoCount; i < 5; i++){
+            bingoCardList[i].GetComponent<Button>().interactable = true;
+        }
+        
+        //Call for victory if bingoCount == 5.
+        if(bingoCount == 5) ClientPlayerScript.scriptInstance.CmdGameWon();
+        
 //        print("Bingo count is: " + bingoCount);
     }
 }

@@ -12,6 +12,8 @@ public class ServerGameManagerScirpt : MonoBehaviour
     public bool EveryOneReady = false;
     public Button StartButton;
     
+    public int winnersCount = 0;
+    
     void Start(){
         scriptInstance = this;
         AllPlayersObj = ConnectedPlayersStaticScript.instance;
@@ -32,24 +34,38 @@ public class ServerGameManagerScirpt : MonoBehaviour
         
         bool turnPlayerDetected = false;
         print("Tick validity");
+        
+        List<ClientPlayerScript> clientScripts = new List<ClientPlayerScript>();
+        
         foreach (Transform child in AllPlayersObj.transform)
         {
             ClientPlayerScript clientPlayerScript = child.gameObject.GetComponent<ClientPlayerScript>();
+            
+            clientScripts.Add(clientPlayerScript);
+            
+        }
+        
+        for(int i = 0; i < clientScripts.Count; i++){
+            ClientPlayerScript clientPlayerScript = clientScripts[i];
             if(clientPlayerScript.isTurn == true){
                 clientPlayerScript.isTurn = false;
                 turnPlayerDetected = true;
             }else if(turnPlayerDetected == true){
-                clientPlayerScript.isTurn = true;
-                return;
+                if(clientPlayerScript.gameWon == false){
+                    clientPlayerScript.isTurn = true;
+                    return;
+                }
             }
         }
-        print("Tick validity");
+        
         //If it survived the check, then select first player.
         foreach (Transform child in AllPlayersObj.transform)
         {
             ClientPlayerScript clientPlayerScript = child.gameObject.GetComponent<ClientPlayerScript>();
-            clientPlayerScript.isTurn = true;
-            return;
+            if(clientPlayerScript.gameWon == false){
+                clientPlayerScript.isTurn = true;
+                return;
+            }
         }
     }
     
