@@ -6,11 +6,14 @@ using UnityEngine.UI;
 
 public class ServerGameManagerScirpt : MonoBehaviour
 {
+    public static ServerGameManagerScirpt scriptInstance;
+    
     private GameObject AllPlayersObj;
     public bool EveryOneReady = false;
     public Button StartButton;
     
     void Start(){
+        scriptInstance = this;
         AllPlayersObj = ConnectedPlayersStaticScript.instance;
     }
     
@@ -18,9 +21,35 @@ public class ServerGameManagerScirpt : MonoBehaviour
         //Constantly check if all players are ready;
         foreach (Transform child in AllPlayersObj.transform)
         {
-            
             ClientPlayerScript clientPlayerScript = child.gameObject.GetComponent<ClientPlayerScript>();
             clientPlayerScript.RpcStartGame();
+        }
+        
+        ClientPlayerScript.scriptInstance.isTurn = true;
+    }
+    
+    public void TurnFinished(int numberSelectedDuringTurn){
+        
+        bool turnPlayerDetected = false;
+        print("Tick validity");
+        foreach (Transform child in AllPlayersObj.transform)
+        {
+            ClientPlayerScript clientPlayerScript = child.gameObject.GetComponent<ClientPlayerScript>();
+            if(clientPlayerScript.isTurn == true){
+                clientPlayerScript.isTurn = false;
+                turnPlayerDetected = true;
+            }else if(turnPlayerDetected == true){
+                clientPlayerScript.isTurn = true;
+                return;
+            }
+        }
+        print("Tick validity");
+        //If it survived the check, then select first player.
+        foreach (Transform child in AllPlayersObj.transform)
+        {
+            ClientPlayerScript clientPlayerScript = child.gameObject.GetComponent<ClientPlayerScript>();
+            clientPlayerScript.isTurn = true;
+            return;
         }
     }
     

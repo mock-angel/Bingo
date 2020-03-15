@@ -19,6 +19,11 @@ public class ClientPlayerScript : NetworkBehaviour
     
     bool ObjectAuthority = false;
     
+    [SyncVar]
+    public bool isTurn = false;
+    
+    public bool gameStarted = false;
+    
     public override void OnStartLocalPlayer(){
         base.OnStartLocalPlayer();
         ClientSetPlayerName(Player.instance.DisplayName);
@@ -68,6 +73,11 @@ public class ClientPlayerScript : NetworkBehaviour
         RpcChangeParent();
     }
     
+    [Command]
+    public void CmdTurnFinished(int numberSelected){
+        ServerGameManagerScirpt.scriptInstance.TurnFinished(numberSelected);
+    }
+    
     [ClientRpc]
     public void RpcChangeParent(){
         GameObject[] PlayerObjects = GameObject.FindGameObjectsWithTag("Player");
@@ -78,6 +88,7 @@ public class ClientPlayerScript : NetworkBehaviour
     
     [ClientRpc]
     public void RpcStartGame(){
+        gameStarted = true;
         if(ObjectAuthority == true){
             print("Authority start");
             GameManagerBingo.scriptInstance.RpcStartGame();

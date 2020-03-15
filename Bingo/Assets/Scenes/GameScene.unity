@@ -1833,6 +1833,36 @@ PrefabInstance:
       propertyPath: AllPlayersObj
       value: 
       objectReference: {fileID: 1064853422}
+    - target: {fileID: 3369704454738522393, guid: f1b51d34b717bb4daaa9315268b03fc5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369704454738522393, guid: f1b51d34b717bb4daaa9315268b03fc5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369704454738522393, guid: f1b51d34b717bb4daaa9315268b03fc5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369704454738522393, guid: f1b51d34b717bb4daaa9315268b03fc5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369704454738522393, guid: f1b51d34b717bb4daaa9315268b03fc5,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369704454738522393, guid: f1b51d34b717bb4daaa9315268b03fc5,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7260120535057141708, guid: f1b51d34b717bb4daaa9315268b03fc5,
         type: 3}
       propertyPath: m_textInfo.characterCount

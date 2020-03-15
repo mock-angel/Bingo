@@ -26,6 +26,10 @@ public class GameManagerBingo : NetworkBehaviour
     
     public DisplayContentManager contextManager;
     
+    private bool gamePlayEnabled = false;
+    
+    public GameObject DisableCanvas;
+    
     void Start(){
         horizontalsList = new List<GameObject>();
         idLocation = new List<int>();
@@ -40,13 +44,13 @@ public class GameManagerBingo : NetworkBehaviour
         }
         
         horizontalsList.Clear();
+        Cards.Clear();
     }
     
     public void Reset(){
         DestroyHorizontals();
         
         //Reset all list elements.
-        
         idLocation.Clear();
         
         //Add 25 zeroes to idLocation.
@@ -66,6 +70,9 @@ public class GameManagerBingo : NetworkBehaviour
         
         Reset();
         ready = false;
+        
+        SetGamePlayEnable(true);
+        gamePlayEnabled = true;
         
         for (int i = 1; i <= 5; i++){
             horizontalsList.Add(Instantiate(Horizontals, GamePanelObject.transform));
@@ -95,9 +102,16 @@ public class GameManagerBingo : NetworkBehaviour
     public void RpcStartGame(){
         DestroyHorizontals();
         
+        Cards.Clear();
+        horizontalsList.Clear();
+        
+        SetGamePlayEnable(false);
+        gamePlayEnabled = false;
+        
         for (int i = 1; i <= 5; i++){
             horizontalsList.Add(Instantiate(Horizontals, GamePanelObject.transform));
         }
+        
         int loc = 0;
         for (int i = 0; i < 5; i++){
             for (int j=1; j<=5 ; j++){
@@ -106,6 +120,47 @@ public class GameManagerBingo : NetworkBehaviour
                 card.GetComponent<CardNumPlayer>().id = idLocation[loc++];
                 card.GetComponent<CardNumPlayer>().gameManagerBingo = this;
                 card.GetComponent<CardNumPlayer>().ApplyText();
+                card.GetComponent<Button>().onClick.AddListener ( delegate { Tick(card, card.GetComponent<CardNumPlayer>().id); });
+//                card.GetComponent<Button>().interactable = false;
+                Cards.Add(card);
+            }
+        }
+    }
+    
+    public void Tick(GameObject card, int id){
+        print("Pressed : " + id);
+        
+        SetGamePlayEnable(false);
+        gamePlayEnabled = false;
+        
+        ClientPlayerScript.scriptInstance.CmdTurnFinished(id);
+    }
+    
+    public void SetGamePlayEnable(bool gamePlayEnabled){
+        DisableCanvas.SetActive(!gamePlayEnabled);
+    }
+    
+    void FixedUpdate(){
+        
+        if(ClientPlayerScript.scriptInstance.gameStarted == false) return; 
+        print("Here i am");
+        if(ClientPlayerScript.scriptInstance.isTurn == true){
+            if(gamePlayEnabled == true){
+                return;
+            }
+            else{
+                //Enable gameplay.
+                SetGamePlayEnable(true);
+                gamePlayEnabled = true;
+            }
+        }
+        else{
+            if(gamePlayEnabled == false){
+                return;
+            }
+            else{
+                SetGamePlayEnable(false);
+                gamePlayEnabled = false;
             }
         }
     }
