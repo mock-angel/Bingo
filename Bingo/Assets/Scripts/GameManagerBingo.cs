@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using Mirror;
+//using Mirror;
 
-public class GameManagerBingo : NetworkBehaviour
+public class GameManagerBingo : MonoBehaviour
 {
     public static GameManagerBingo scriptInstance;
     public List<GameObject> Cards;
@@ -33,9 +33,15 @@ public class GameManagerBingo : NetworkBehaviour
     void Start(){
         horizontalsList = new List<GameObject>();
         idLocation = new List<int>();
+        Cards = new List<GameObject>();
         
         CreateEmptyCards();
         scriptInstance = this;
+    }
+    
+    void OnEnable()
+    {
+        CreateEmptyCards();
     }
     
     public void DestroyHorizontals(){
@@ -134,6 +140,13 @@ public class GameManagerBingo : NetworkBehaviour
         gamePlayEnabled = false;
         
         ClientPlayerScript.scriptInstance.CmdTurnFinished(id);
+        
+        //The below line might be a fix, but might break system.
+//        ClientPlayerScript.scriptInstance.isTurn = false;
+    }
+    
+    public void TurnFinished(int numberSelected){
+        Cards[idLocation.IndexOf(numberSelected)].GetComponent<Button>().interactable = false;
     }
     
     public void SetGamePlayEnable(bool gamePlayEnabled){
@@ -143,7 +156,6 @@ public class GameManagerBingo : NetworkBehaviour
     void FixedUpdate(){
         
         if(ClientPlayerScript.scriptInstance.gameStarted == false) return; 
-        print("Here i am");
         if(ClientPlayerScript.scriptInstance.isTurn == true){
             if(gamePlayEnabled == true){
                 return;

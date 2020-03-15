@@ -75,7 +75,13 @@ public class ClientPlayerScript : NetworkBehaviour
     
     [Command]
     public void CmdTurnFinished(int numberSelected){
+        RpcTurnFinished(numberSelected);
         ServerGameManagerScirpt.scriptInstance.TurnFinished(numberSelected);
+    }
+    
+    [ClientRpc]
+    public void RpcTurnFinished(int numberSelected){
+        GameManagerBingo.scriptInstance.TurnFinished(numberSelected);
     }
     
     [ClientRpc]

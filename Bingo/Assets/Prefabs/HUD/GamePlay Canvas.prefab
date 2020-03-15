@@ -580,9 +580,7 @@ GameObject:
   - component: {fileID: 7429654453534120012}
   - component: {fileID: 7429654453534120015}
   - component: {fileID: 7429654453534120014}
-  - component: {fileID: 1673591790552494037}
   - component: {fileID: 7429654453534120013}
-  - component: {fileID: 7429654453534119986}
   m_Layer: 5
   m_Name: GamePanel
   m_TagString: Untagged
@@ -670,21 +668,6 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
---- !u!114 &1673591790552494037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7429654453534120008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
 --- !u!114 &7429654453534120013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,20 +694,6 @@ MonoBehaviour:
   horizontalsList: []
   contextManager: {fileID: 7429654453497636886}
   DisableCanvas: {fileID: 3292765431649126885}
---- !u!114 &7429654453534119986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7429654453534120008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52967663927ba52bf9533f560740cf82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
 --- !u!1 &7429654453791807616
 GameObject:
   m_ObjectHideFlags: 0
