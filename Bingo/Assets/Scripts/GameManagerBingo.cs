@@ -9,6 +9,8 @@ public class GameManagerBingo : MonoBehaviour
 {
     public static GameManagerBingo scriptInstance;
     public List<GameObject> Cards;
+    
+    public GameObject BingoCardPrefab;
     public GameObject CardPrefab;
     public GameObject EmptyCardPrefab;
     public int current;
@@ -29,6 +31,9 @@ public class GameManagerBingo : MonoBehaviour
     private bool gamePlayEnabled = false;
     
     public GameObject DisableCanvas;
+    public int currentBingoCount = 0;
+    
+    private GameObject BingoHorizontal;
     
     void Start(){
         horizontalsList = new List<GameObject>();
@@ -41,10 +46,17 @@ public class GameManagerBingo : MonoBehaviour
     
     void OnEnable()
     {
+//        horizontalsList = new List<GameObject>();
+//        idLocation = new List<int>();
+//        Cards = new List<GameObject>();
         CreateEmptyCards();
     }
     
     public void DestroyHorizontals(){
+        for(int i = 0; i < Cards.Count; i++){
+            Destroy(Cards[i]);
+        }
+        
         for(int i = 0; i < horizontalsList.Count; i++){
             Destroy(horizontalsList[i]);
         }
@@ -57,7 +69,10 @@ public class GameManagerBingo : MonoBehaviour
         DestroyHorizontals();
         
         //Reset all list elements.
+//        idLocation = new List<int>();
         idLocation.Clear();
+        
+        print("Reached break point");
         
         //Add 25 zeroes to idLocation.
         for (int i = 0; i < 25; i++){
@@ -114,6 +129,7 @@ public class GameManagerBingo : MonoBehaviour
         SetGamePlayEnable(false);
         gamePlayEnabled = false;
         
+        BingoHorizontal = Instantiate(Horizontals, GamePanelObject.transform);
         for (int i = 1; i <= 5; i++){
             horizontalsList.Add(Instantiate(Horizontals, GamePanelObject.transform));
         }
@@ -131,6 +147,14 @@ public class GameManagerBingo : MonoBehaviour
                 Cards.Add(card);
             }
         }
+        
+        List<string> listBingo = new List<string>(){"B", "I", "N", "G", "O"};
+        
+        //Now add bingo cards;
+        for(int i = 0; i < listBingo.Count; i++){
+            GameObject bingoCard = Instantiate(BingoCardPrefab, BingoHorizontal.transform);
+            bingoCard.GetComponent<BingoNum>().text.text = listBingo[i];
+        }
     }
     
     public void Tick(GameObject card, int id){
@@ -141,12 +165,18 @@ public class GameManagerBingo : MonoBehaviour
         
         ClientPlayerScript.scriptInstance.CmdTurnFinished(id);
         
+//        idLocation[idLocation.IndexOf(id)] = 0;
         //The below line might be a fix, but might break system.
 //        ClientPlayerScript.scriptInstance.isTurn = false;
     }
     
     public void TurnFinished(int numberSelected){
         Cards[idLocation.IndexOf(numberSelected)].GetComponent<Button>().interactable = false;
+        
+        //This is done fo convinence in BINGO checking.
+        idLocation[idLocation.IndexOf(numberSelected)] = 0;
+        
+        CheckBingo();
     }
     
     public void SetGamePlayEnable(bool gamePlayEnabled){
@@ -178,6 +208,52 @@ public class GameManagerBingo : MonoBehaviour
     }
     
     public void CheckBingo(){
+        //check horizontal first.
+        bool flag = true;
+        int bingoCount = 0;
+        
+        //TODO: Combine horizontal and vertical checks to reduce search complexity by 2?
+        flag = true;
+        for (int i = 0; i < 5; i++){
+            flag = true;
+            for(int j = i*5; j < (5 + i*5); j++){
+                if(idLocation[j] != 0)
+                    flag = false;
+            }
+            if(flag == true) bingoCount++;
+        }
+//        string stringDeb = "";
+        for (int i = 0; i < 5; i++){
+            flag = true;
+            for(int j = i*5; j < (5 + i*5); j++){
+                if(idLocation[(j%5)*5 + i] != 0){
+//                    stringDeb += (j%5)*5 + i;
+                    flag = false;
+                }
+            }
+            if(flag == true) bingoCount++;
+        }
+//        print(stringDeb);
+//        
+//        //Check diagonal
+        flag = true;
+        for (int i = 0; i < 5; i++){
+            if(idLocation[i*5 + i] != 0)
+                flag = false;
+        }
+        if(flag == true) bingoCount++;
+        
+        flag = true;
+        for (int i = 0; i < 5; i++){
+            if(idLocation[(i+1)*4] != 0)
+                flag = false;
+        }
+        if(flag == true) bingoCount++;
+        
+        if (bingoCount>5) bingoCount = 5;
+        
+        currentBingoCount = bingoCount;
+//        print("Bingo count is: " + bingoCount);
     }
 }
 

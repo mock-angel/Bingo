@@ -23,7 +23,10 @@ public class UpdateConnectedPlayersList : MonoBehaviour
             clientDisplayName = clientPlayerScript.playerName;
             
             if(clientPlayerScript.gameStarted == true){
-                if (clientPlayerScript.isTurn) clientDisplayName += " (Current Turn)";
+                if(clientPlayerScript.gameWon == true){
+                    clientDisplayName += " (Won " + clientPlayerScript.winOrder + " )" ;
+                }
+                else if (clientPlayerScript.isTurn) clientDisplayName += " (Current Turn)";
             }
             else{
                 if (clientPlayerScript.ready) clientDisplayName += " (Ready)";

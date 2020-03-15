@@ -24,6 +24,9 @@ public class ClientPlayerScript : NetworkBehaviour
     
     public bool gameStarted = false;
     
+    public bool gameWon = false;
+    public int winOrder = 0;
+    
     public override void OnStartLocalPlayer(){
         base.OnStartLocalPlayer();
         ClientSetPlayerName(Player.instance.DisplayName);

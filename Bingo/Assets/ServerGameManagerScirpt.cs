@@ -61,7 +61,6 @@ public class ServerGameManagerScirpt : MonoBehaviour
         //Constantly check if all players are ready;
         foreach (Transform child in AllPlayersObj.transform)
         {
-            
             ClientPlayerScript clientPlayerScript = child.gameObject.GetComponent<ClientPlayerScript>();
             if(!clientPlayerScript.ready)
                 everyOneReady = false;
