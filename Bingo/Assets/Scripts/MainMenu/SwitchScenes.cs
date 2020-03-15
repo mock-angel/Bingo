@@ -12,6 +12,6 @@ public class SwitchScenes : MonoBehaviour
 
     public void GotoLevel()
     {
-        SceneManager.LoadScene("Levels");
+        SceneManager.LoadScene("GameScene");
     }
 }

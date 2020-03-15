@@ -90,9 +90,9 @@ GameObject:
   - component: {fileID: 432191352332517421}
   - component: {fileID: 432191352332517420}
   - component: {fileID: -2650631692527074070}
-  - component: {fileID: 1872214903516697262}
+  - component: {fileID: 5223217863779500062}
   m_Layer: 5
-  m_Name: Card 0
+  m_Name: BingoCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,11 +174,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.6415094, g: 0.6233535, b: 0.6233535, a: 1}
+    m_HighlightedColor: {r: 0.4528302, g: 0.42933428, b: 0.42933428, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.76380515, g: 1, b: 0, a: 0.5019608}
+    m_SelectedColor: {r: 0.6603774, g: 0.53266287, b: 0.53266287, a: 1}
+    m_DisabledColor: {r: 0.85882354, g: 0.64416414, b: 0.39607847, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -196,29 +196,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 432191352332517421}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1872214903516697262}
-        m_MethodName: AssignCardNum
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 432191352332517420}
-        m_MethodName: set_interactable
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &-2650631692527074070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +212,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   m_AssetId: 
---- !u!114 &1872214903516697262
+--- !u!114 &5223217863779500062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,9 +221,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 432191352332517422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e913ebf3ec346ff6d8c39a069162b38c, type: 3}
+  m_Script: {fileID: 11500000, guid: c3a701340e942cb408ce071ab763263b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  gameManagerBingo: {fileID: 0}
   text: {fileID: 432191352102150532}

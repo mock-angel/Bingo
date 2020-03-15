@@ -1,12 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class Player : MonoBehaviour
 {
-    public int Coins = 0;
+    public string DisplayName;
+    public static Player instance;
+    
+    public TextMeshProUGUI displayText;
     
     public void Start(){
+        instance = this;
         LoadPlayer();
     }
     
@@ -17,7 +24,14 @@ public class Player : MonoBehaviour
     public void LoadPlayer(){
         PlayerData data = SaveSystem.LoadPlayer();
         if(data != null)
-            Coins = data.Coins;
+            DisplayName = data.DisplayName;
         else SavePlayer();
+        
+        displayText.text = DisplayName;
+    }
+    
+    public void UpdatePlayerName(){
+        DisplayName = displayText.text;
+        SavePlayer();
     }
 }
