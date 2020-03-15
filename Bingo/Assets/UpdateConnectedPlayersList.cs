@@ -5,10 +5,11 @@ using TMPro;
 
 public class UpdateConnectedPlayersList : MonoBehaviour
 {
-    public GameObject AllPlayersObj;
+    private GameObject AllPlayersObj;
     private TextMeshProUGUI connectedPlayersText;
     
     void Start(){
+        AllPlayersObj = ConnectedPlayersStaticScript.instance.gameObject;
         connectedPlayersText = gameObject.GetComponent<TextMeshProUGUI>();
     }
     

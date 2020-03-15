@@ -172,7 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5c344392b975fffa2ae42439fa8d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllPlayersObj: {fileID: 0}
 --- !u!1 &7279798695291667518
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +432,7 @@ GameObject:
   - component: {fileID: 7429654453534120012}
   - component: {fileID: 7429654453534120015}
   - component: {fileID: 7429654453534120014}
+  - component: {fileID: 1673591790552494037}
   - component: {fileID: 7429654453534120013}
   - component: {fileID: 7429654453534119986}
   m_Layer: 5
@@ -522,6 +522,21 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1673591790552494037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429654453534120008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
 --- !u!114 &7429654453534120013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,6 +549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34605e8b8cfdf5e4a8519b1ba7c5a629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   Cards: []
   CardPrefab: {fileID: 432191352332517422, guid: 6086b0670414f3fee96a59b88de46ab6,
     type: 3}
@@ -964,17 +981,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7429654455444556482}
-        m_MethodName: set_interactable
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 4574801416470812170}
         m_MethodName: OnReady
         m_Mode: 6
@@ -1194,19 +1200,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7429654453534120013}
-        m_MethodName: StartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7429654455444556482}
-        m_MethodName: set_interactable
+      - m_Target: {fileID: 7429654455444556508}
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1217,7 +1212,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_MethodName: startGame
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1225,7 +1220,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &7429654455444556481
 MonoBehaviour:

@@ -14,9 +14,10 @@ public class ClientPlayerScript : NetworkBehaviour
     [SyncVar]
     public int selfId;
     
-//    [SyncVar(hook = nameof(CmdAllClientsSetReady))]
     [SyncVar]
     public bool ready;
+    
+    bool ObjectAuthority = false;
     
     public override void OnStartLocalPlayer(){
         base.OnStartLocalPlayer();
@@ -25,10 +26,8 @@ public class ClientPlayerScript : NetworkBehaviour
         CmdChangeParent();
         
         scriptInstance = this;
-    }
-    
-    public void Start(){
         
+        ObjectAuthority = true;
     }
     
     //script on client side.
@@ -49,12 +48,10 @@ public class ClientPlayerScript : NetworkBehaviour
     [Command]
     public void CmdAllClientsSetReady(bool newReady){
         ready = newReady;
-//        RpcAllClientsSetReady(newReady);
     }
     [Command]
     public void CmdSetPlayerNameString(string name){
         playerName = name;
-//        RpcSetPlayerNameString(name);
     }
     
     [Command]
@@ -67,18 +64,9 @@ public class ClientPlayerScript : NetworkBehaviour
     public void CmdChangeParent(){
         transform.parent = ConnectedPlayersStaticScript.instance.transform;
         
-//        GameObject[] PlayerObjects = GameObject.FindGameObjectsWithTag("Player");
-//        foreach (GameObject singlePlayer in PlayerObjects){
-//            singlePlayer.transform.parent = ConnectedPlayersStaticScript.instance.transform;
-//        }
-//        
         //Instruct all clients to change parent as well.
         RpcChangeParent();
     }
-//    [ClientRpc]
-//    public void RpcAllClientsSetReady(bool newReady){
-//        ready = newReady;
-//    }
     
     [ClientRpc]
     public void RpcChangeParent(){
@@ -88,8 +76,11 @@ public class ClientPlayerScript : NetworkBehaviour
         }
     }
     
-//    [ClientRpc]
-//    public void RpcSetPlayerNameString(string name){
-//        playerName = name;
-//    }
+    [ClientRpc]
+    public void RpcStartGame(){
+        if(ObjectAuthority == true){
+            print("Authority start");
+            GameManagerBingo.scriptInstance.RpcStartGame();
+        }
+    }
 }

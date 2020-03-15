@@ -2,10 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+
 public class ServerGameManagerScirpt : MonoBehaviour
 {
-    public GameObject AllPlayersObj;
+    private GameObject AllPlayersObj;
     public bool EveryOneReady = false;
+    public Button StartButton;
+    
+    void Start(){
+        AllPlayersObj = ConnectedPlayersStaticScript.instance;
+    }
+    
+    public void StartGame(){
+        //Constantly check if all players are ready;
+        foreach (Transform child in AllPlayersObj.transform)
+        {
+            
+            ClientPlayerScript clientPlayerScript = child.gameObject.GetComponent<ClientPlayerScript>();
+            clientPlayerScript.RpcStartGame();
+        }
+    }
     
     void FixedUpdate()
     {
@@ -22,6 +39,6 @@ public class ServerGameManagerScirpt : MonoBehaviour
         }
         
         EveryOneReady = everyOneReady;
-        
+        StartButton.interactable = EveryOneReady;
     }
 }

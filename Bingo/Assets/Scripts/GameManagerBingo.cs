@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManagerBingo : MonoBehaviour
+using Mirror;
+
+public class GameManagerBingo : NetworkBehaviour
 {
+    public static GameManagerBingo scriptInstance;
     public List<GameObject> Cards;
     public GameObject CardPrefab;
     public GameObject EmptyCardPrefab;
@@ -28,6 +31,7 @@ public class GameManagerBingo : MonoBehaviour
         idLocation = new List<int>();
         
         CreateEmptyCards();
+        scriptInstance = this;
     }
     
     public void DestroyHorizontals(){
@@ -88,7 +92,7 @@ public class GameManagerBingo : MonoBehaviour
         return nextCardNum++;
     }
     
-    public void StartGame(){
+    public void RpcStartGame(){
         DestroyHorizontals();
         
         for (int i = 1; i <= 5; i++){
@@ -107,7 +111,7 @@ public class GameManagerBingo : MonoBehaviour
     }
     
     public void CheckBingo(){
-        
     }
-    
 }
+
+
