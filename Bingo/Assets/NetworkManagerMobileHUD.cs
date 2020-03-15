@@ -43,7 +43,7 @@ namespace Mirror
         
         public TextMeshProUGUI ConnectingText;
         public TextMeshProUGUI ConnectedText;
-        public TextMeshProUGUI IPtext;
+        public TMP_InputField IPtext;
         
         
         void Start()
@@ -65,7 +65,8 @@ namespace Mirror
         
         void FixedUpdate(){
 //            return;
-            manager.networkAddress = IPtext.text + " ";
+            manager.networkAddress = IPtext.text;
+            IPtext.text = manager.networkAddress;
             
             string str = "";
             if (!NetworkClient.isConnected && !NetworkServer.active)
@@ -107,15 +108,15 @@ namespace Mirror
             // client ready
             if (NetworkClient.isConnected && !ClientScene.ready)
             {
-//                if (GUILayout.Button("Client Ready", customButton, GUILayout.Height(100)))
-//                {
-//                    ClientScene.Ready(NetworkClient.connection);
+                if (GUILayout.Button("Client Ready", customButton, GUILayout.Height(100)))
+                {
+                    ClientScene.Ready(NetworkClient.connection);
 
-//                    if (ClientScene.localPlayer == null)
-//                    {
-//                        ClientScene.AddPlayer();
-//                    }
-//                }
+                    if (ClientScene.localPlayer == null)
+                    {
+                        ClientScene.AddPlayer();
+                    }
+                }
             }
 
             // stop
@@ -134,7 +135,6 @@ namespace Mirror
         {
             if (!showGUI)
                 return;
-            return;
             
             GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, 215*1.9f, 9999));
             if (!NetworkClient.isConnected && !NetworkServer.active)
@@ -161,15 +161,15 @@ namespace Mirror
                     GUILayout.EndHorizontal();
 
 //                    // LAN Server Only
-//                    if (Application.platform == RuntimePlatform.WebGLPlayer)
-//                    {
-//                        // cant be a server in webgl build
-//                        GUILayout.Box("(  WebGL cannot be server  )", GUILayout.Height(30));
-//                    }
-//                    else
-//                    {
-//                        if (GUILayout.Button("LAN Server Only", customButton, GUILayout.Height(100))) manager.StartServer();
-//                    }
+                    if (Application.platform == RuntimePlatform.WebGLPlayer)
+                    {
+                        // cant be a server in webgl build
+                        GUILayout.Box("(  WebGL cannot be server  )", GUILayout.Height(30));
+                    }
+                    else
+                    {
+                        if (GUILayout.Button("LAN Server Only", customButton, GUILayout.Height(100))) manager.StartServer();
+                    }
                 }
                 else
                 {
@@ -195,18 +195,18 @@ namespace Mirror
             }
 
             // client ready
-//            if (NetworkClient.isConnected && !ClientScene.ready)
-//            {
-//                if (GUILayout.Button("Client Ready", customButton, GUILayout.Height(100)))
-//                {
-//                    ClientScene.Ready(NetworkClient.connection);
+            if (NetworkClient.isConnected && !ClientScene.ready)
+            {
+                if (GUILayout.Button("Client Ready", customButton, GUILayout.Height(100)))
+                {
+                    ClientScene.Ready(NetworkClient.connection);
 
-//                    if (ClientScene.localPlayer == null)
-//                    {
-//                        ClientScene.AddPlayer();
-//                    }
-//                }
-//            }
+                    if (ClientScene.localPlayer == null)
+                    {
+                        ClientScene.AddPlayer();
+                    }
+                }
+            }
 
             // stop
             if (NetworkServer.active || NetworkClient.isConnected)
@@ -216,7 +216,7 @@ namespace Mirror
                     manager.StopHost();
                 }
             }
-
+            
             GUILayout.EndArea();
         }
     }

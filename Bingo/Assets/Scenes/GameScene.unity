@@ -203,17 +203,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1249880566}
-        m_MethodName: IPValueUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1249880565}
         m_MethodName: StartHost
         m_Mode: 1
@@ -1017,17 +1006,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1249880566}
-        m_MethodName: IPValueUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1249880565}
         m_MethodName: StartClient
         m_Mode: 1
@@ -2603,7 +2581,7 @@ MonoBehaviour:
   onlineScene: 
   transport: {fileID: 1249880564}
   networkAddress: localhost
-  maxConnections: 3
+  maxConnections: 4
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 4329651693945109724, guid: a6cf83af490ccf119922d6787bc0e9ab,
     type: 3}
@@ -2622,7 +2600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6445f42a7686f208252e70b1768ea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showGUI: 1
+  showGUI: 0
   offsetX: 0
   offsetY: 0
   customButton:
@@ -2831,7 +2809,7 @@ MonoBehaviour:
   ConnectedPanel: {fileID: 1874802786}
   ConnectingText: {fileID: 1744561380}
   ConnectedText: {fileID: 1803896565}
-  IPtext: {fileID: 550305925}
+  IPtext: {fileID: 1269397434}
 --- !u!1 &1254682078
 GameObject:
   m_ObjectHideFlags: 0
@@ -4695,7 +4673,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1001 &2129635324
 PrefabInstance:
@@ -4892,6 +4870,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429654453791807623, guid: f1b51d34b717bb4daaa9315268b03fc5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7429654453791807626, guid: f1b51d34b717bb4daaa9315268b03fc5,
         type: 3}
