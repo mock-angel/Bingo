@@ -11,6 +11,8 @@ public class photonConnect : MonoBehaviourPunCallbacks
     public GameObject connectedView;
     public GameObject disconnectedView;
     
+    bool connectedToMaster = false;
+    
     void Awake(){
         PhotonNetwork.ConnectUsingSettings();
         
@@ -20,6 +22,10 @@ public class photonConnect : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster(){
         PhotonNetwork.JoinLobby(TypedLobby.Default);
         
+        if(disconnectedView.activeSelf)
+            disconnectedView.SetActive(false);
+            
+        connectedToMaster = true;
         Debug.Log("We are connected to master");
     }
     
@@ -38,6 +44,11 @@ public class photonConnect : MonoBehaviourPunCallbacks
             connectedView.SetActive(false);
         
         disconnectedView.SetActive(true);
+        connectedToMaster = false;
         Debug.Log("Disconnected from photon services");
+    }
+    
+    void FixedUpdate(){
+        if(!connectedToMaster) PhotonNetwork.ConnectUsingSettings();
     }
 }

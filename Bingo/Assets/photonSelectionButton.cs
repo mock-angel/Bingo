@@ -8,10 +8,8 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 
-
-public class photonButton : MonoBehaviourPunCallbacks
+public class photonSelectionButton : MonoBehaviourPunCallbacks
 {
-    public menuLogic mLogic;
     public TMP_InputField createRoomInput, joinRoomInput;
     // Start is called before the first frame update
     
@@ -27,7 +25,6 @@ public class photonButton : MonoBehaviourPunCallbacks
     
     public override void OnJoinedRoom(){
         Debug.Log("We are connected to the room!");
-        mLogic.OnChangeToGameLevel();
+        menuLogic.OnChangeToRoom();
     }
-    
 }
