@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public string DisplayName;
     public static Player instance;
     
-    public TextMeshProUGUI displayText;
+    public TMP_InputField displayText;
     
     public void Start(){
         instance = this;
