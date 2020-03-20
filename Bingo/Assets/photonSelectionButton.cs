@@ -14,11 +14,17 @@ public class photonSelectionButton : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     
     public void OnClickCreateRoom(){
+        //Dont let player create room when name isnt set.
+        if(Player.instance.DisplayName.Length < 1) return;
+
         if(createRoomInput.text.Length >= 1)
         PhotonNetwork.CreateRoom(createRoomInput.text, new RoomOptions(){MaxPlayers = 4}, null);
     }
     
     public void OnClickJoinRoom(){
+        //Dont let player join when name isnt set.
+        if(Player.instance.DisplayName.Length < 1) return;
+        
         if(joinRoomInput.text.Length >= 1)
         PhotonNetwork.JoinRoom(joinRoomInput.text);
     }
