@@ -257,16 +257,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432191352332517422}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 122
-  m_MinHeight: 125
+  m_MinWidth: -1
+  m_MinHeight: -1
   m_PreferredWidth: 122
   m_PreferredHeight: 125
-  m_FlexibleWidth: 0
-  m_FlexibleHeight: 0
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
   m_LayoutPriority: 1
