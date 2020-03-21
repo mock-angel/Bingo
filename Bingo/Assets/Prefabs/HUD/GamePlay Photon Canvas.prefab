@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 466696022180627641}
   - component: {fileID: 466696022180627642}
   - component: {fileID: 466696022180627643}
-  - component: {fileID: 466696022180627640}
+  - component: {fileID: 5394493565168579315}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -528,7 +528,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &466696022180627640
+--- !u!114 &5394493565168579315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  serverOnly: 1
+  serverOnly: 0
   m_AssetId: 
 --- !u!1 &466696022381422185
 GameObject:
@@ -631,7 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayText: {fileID: 466696022025083758}
   ReadyButton: {fileID: 466696021825913028}
-  BingoManager: {fileID: 466696022417806900}
+  BingoManager: {fileID: 3118642994044035197}
   NotReadyText: Please Fill All Tiles
   PressReadyText: Press Ready To begin
 --- !u!1 &466696022417806897
@@ -646,7 +646,6 @@ GameObject:
   - component: {fileID: 466696022417806901}
   - component: {fileID: 466696022417806902}
   - component: {fileID: 466696022417806903}
-  - component: {fileID: 466696022417806900}
   m_Layer: 5
   m_Name: GamePanel
   m_TagString: Untagged
@@ -734,33 +733,6 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
---- !u!114 &466696022417806900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466696022417806897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34605e8b8cfdf5e4a8519b1ba7c5a629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cards: []
-  BingoCardPrefab: {fileID: 432191352332517422, guid: ec882981f57549fb8b47bcbe3037b4be,
-    type: 3}
-  CardPrefab: {fileID: 432191352332517422, guid: 6086b0670414f3fee96a59b88de46ab6,
-    type: 3}
-  EmptyCardPrefab: {fileID: 432191352332517422, guid: 40fb7b35b35699d06a73927d586c65e1,
-    type: 3}
-  current: 0
-  GamePanelObject: {fileID: 466696022417806897}
-  Horizontals: {fileID: 8803582961848704089, guid: c79bb58caf4841c828cc91d5e43e0c80,
-    type: 3}
-  horizontalsList: []
-  contextManager: {fileID: 466696022381422191}
-  DisableCanvas: {fileID: 5535810582648719260}
-  currentBingoCount: 0
 --- !u!1 &466696022692271865
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,6 +745,7 @@ GameObject:
   - component: {fileID: 466696022692271870}
   - component: {fileID: 466696022692271871}
   - component: {fileID: 466696022692271864}
+  - component: {fileID: 3118642994044035197}
   m_Layer: 5
   m_Name: GamePlay Photon Canvas
   m_TagString: Untagged
@@ -866,6 +839,33 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3118642994044035197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466696022692271865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d235c02b0257ee56aa8c0644f41a9940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cards: []
+  BingoCardPrefab: {fileID: 432191352332517422, guid: ec882981f57549fb8b47bcbe3037b4be,
+    type: 3}
+  CardPrefab: {fileID: 432191352332517422, guid: 6086b0670414f3fee96a59b88de46ab6,
+    type: 3}
+  EmptyCardPrefab: {fileID: 432191352332517422, guid: 40fb7b35b35699d06a73927d586c65e1,
+    type: 3}
+  current: 0
+  GamePanelObject: {fileID: 466696022417806897}
+  Horizontals: {fileID: 8803582961848704089, guid: c79bb58caf4841c828cc91d5e43e0c80,
+    type: 3}
+  horizontalsList: []
+  contextManager: {fileID: 466696022381422191}
+  DisableCanvas: {fileID: 5535810582648719260}
+  currentBingoCount: 0
 --- !u!1 &466696023001755992
 GameObject:
   m_ObjectHideFlags: 0

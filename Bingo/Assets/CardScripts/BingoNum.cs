@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BingoNum : MonoBehaviour
 {
-//    public GameManagerBingo gameManagerBingo;
-    public Text text;
+//    public PhotonGameManagerBingo gameManagerBingo;
+    public TextMeshProUGUI text;
 }

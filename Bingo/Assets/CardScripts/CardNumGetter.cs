@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CardNumGetter : MonoBehaviour
 {
     public int id = 0;
-    public GameManagerBingo gameManagerBingo;
-    public Text text;
+    public PhotonGameManagerBingo gameManagerBingo;
+    public TextMeshProUGUI text;
     
     public void AssignCardNum(){
         int i = gameManagerBingo.getNextCardNumAndAssign(id);

@@ -1,44 +1,100 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class ClientPlayerScript : NetworkBehaviour
+[RequireComponent(typeof(PhotonView))]
+public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public static ClientPlayerScript scriptInstance;
+    public bool devTesting = false;
     
+    public static PhotonPlayerScript scriptInstance;
+//    public PhotonView photonView;
 //    public List<PlayerNetworkData> playerDataObj;
-    [SyncVar]
-    public string playerName;
+//    [SyncVar]
+    public string playerName = "Unnamed";
     
-    [SyncVar]
+//    [SyncVar]
     public int selfId;
     
-    [SyncVar]
+//    [SyncVar]
     public bool ready;
     
     bool ObjectAuthority = false;
     
-    [SyncVar]
+//    [SyncVar]
     public bool isTurn = false;
     
     public bool gameStarted = false;
     
-    [SyncVar]
+//    [SyncVar]
     public bool gameWon = false;
-    [SyncVar]
+//    [SyncVar]
     public int winOrder = 0;
     
-    public override void OnStartLocalPlayer(){
-        base.OnStartLocalPlayer();
-        ClientSetPlayerName(Player.instance.DisplayName);
+//    public override void OnStartLocalPlayer(){
+//        base.OnStartLocalPlayer();
+//        ClientSetPlayerName(Player.instance.DisplayName);
+//        
+//        CmdChangeParent();
+//        
+//        scriptInstance = this;
+//        
+//        ObjectAuthority = true;
+//    }
+    
+    public void Start(){
+        ChangeParent();
+    }
+    
+    public void ChangeParent(){
+        transform.parent = ConnectedPlayersStaticScript.instance.transform;
+    }
+    
+    public void StartLocalPlayer(){
+//        base.StartLocalPlayer();
+//        ClientSetPlayerName(Player.instance.DisplayName);
         
-        CmdChangeParent();
-        
+//        CmdChangeParent();
         scriptInstance = this;
-        
+        print("script instance assigned");
         ObjectAuthority = true;
     }
+    
+    void Update(){
+        if (photonView.IsMine || devTesting) {
+            
+            return;
+            
+        }
+        else{
+        
+        }
+    
+    }
+                         
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+        if(stream.IsWriting){
+            //stream.SendNext(transform.position);
+        }else{
+            // variable = (data) stream.RecieveNext();
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     //script on client side.
     public void SetClientID(){
@@ -55,22 +111,22 @@ public class ClientPlayerScript : NetworkBehaviour
     }
     
     //server side.
-    [Command]
+//    [Command]
     public void CmdAllClientsSetReady(bool newReady){
         ready = newReady;
     }
-    [Command]
+//    [Command]
     public void CmdSetPlayerNameString(string name){
         playerName = name;
     }
     
-    [Command]
+//    [Command]
     public void CmdAssignClientID(){
 //        int nextId = ServerPlayerScript.instance.getNextID();
         selfId = ServerPlayerScript.instance.getNextID();
 //        NetworkIdentity identity = GetComponent<NetworkIdentity>();
     }
-    [Command]
+//    [Command]
     public void CmdChangeParent(){
         transform.parent = ConnectedPlayersStaticScript.instance.transform;
         
@@ -78,13 +134,13 @@ public class ClientPlayerScript : NetworkBehaviour
         RpcChangeParent();
     }
     
-    [Command]
+//    [Command]
     public void CmdTurnFinished(int numberSelected){
         RpcTurnFinished(numberSelected);
         ServerGameManagerScirpt.scriptInstance.TurnFinished(numberSelected);
     }
     
-    [Command]
+//    [Command]
     public void CmdGameWon(){
         if(gameWon) return;
         
@@ -92,12 +148,12 @@ public class ClientPlayerScript : NetworkBehaviour
         winOrder = ++ServerGameManagerScirpt.scriptInstance.winnersCount;
     }
     
-    [ClientRpc]
+//    [ClientRpc]
     public void RpcTurnFinished(int numberSelected){
         PhotonGameManagerBingo.scriptInstance.TurnFinished(numberSelected);
     }
     
-    [ClientRpc]
+//    [ClientRpc]
     public void RpcChangeParent(){
         GameObject[] PlayerObjects = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < PlayerObjects.Length; i++){//GameObject singlePlayer in PlayerObjects){
@@ -105,7 +161,7 @@ public class ClientPlayerScript : NetworkBehaviour
         }
     }
     
-    [ClientRpc]
+//    [ClientRpc]
     public void RpcStartGame(){
         gameStarted = true;
         if(ObjectAuthority == true){

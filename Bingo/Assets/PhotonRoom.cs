@@ -7,6 +7,17 @@ using Photon.Realtime;
 
 public class PhotonRoom : MonoBehaviourPunCallbacks
 {
+    public GameObject playerPrefab;
+    
+    public void Start(){
+        spawnPlayer();
+    }
+    
+    public void spawnPlayer(){
+        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, playerPrefab.transform.rotation, 0);
+        
+        player.GetComponent<PhotonPlayerScript>().StartLocalPlayer();
+    }
     
     public override void OnDisconnected(DisconnectCause cause){
         menuLogic.OnChangeToLobby();

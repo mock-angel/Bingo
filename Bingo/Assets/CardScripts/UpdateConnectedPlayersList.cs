@@ -9,17 +9,20 @@ public class UpdateConnectedPlayersList : MonoBehaviour
     private TextMeshProUGUI connectedPlayersText;
     
     void Start(){
-        AllPlayersObj = ConnectedPlayersStaticScript.instance.gameObject;
+        if(ConnectedPlayersStaticScript.instance != null)
+            AllPlayersObj = ConnectedPlayersStaticScript.instance.gameObject;
         connectedPlayersText = gameObject.GetComponent<TextMeshProUGUI>();
     }
     
     void FixedUpdate()
     {
+        if(AllPlayersObj == null)
+            AllPlayersObj = ConnectedPlayersStaticScript.instance.gameObject;
         string connectedListString = "";
         foreach (Transform child in AllPlayersObj.transform)
         {
             string clientDisplayName;
-            ClientPlayerScript clientPlayerScript = child.gameObject.GetComponent<ClientPlayerScript>();
+            PhotonPlayerScript clientPlayerScript = child.gameObject.GetComponent<PhotonPlayerScript>();
             clientDisplayName = clientPlayerScript.playerName;
             
             if(clientPlayerScript.gameStarted == true){

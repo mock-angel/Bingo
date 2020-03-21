@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: 
+  displayAsText: 1
   displayText: {fileID: 2915162583382041538}
 --- !u!1 &2163180067810218161
 GameObject:

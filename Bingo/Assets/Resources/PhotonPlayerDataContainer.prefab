@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4452740050936184470}
-  - component: {fileID: 1816220884437139043}
-  - component: {fileID: 7877482807161955282}
+  - component: {fileID: 9217635140309590598}
+  - component: {fileID: -4248512771198705798}
   m_Layer: 0
-  m_Name: ClientPlayerDataContainer
+  m_Name: PhotonPlayerDataContainer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1816220884437139043
+--- !u!114 &9217635140309590598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,13 +41,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4329651693945109724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
---- !u!114 &7877482807161955282
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 2
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: -4248512771198705798}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-4248512771198705798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,11 +63,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4329651693945109724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87bb5b6a26bee303e956bf08278d7fb3, type: 3}
+  m_Script: {fileID: 11500000, guid: aef859e250b4dd9598aaf50225b4c905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
+  devTesting: 0
   playerName: 
   selfId: 0
   ready: 0

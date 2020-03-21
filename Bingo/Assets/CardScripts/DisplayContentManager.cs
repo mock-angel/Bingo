@@ -8,7 +8,7 @@ public class DisplayContentManager : MonoBehaviour
 {
     public Text DisplayText;
     public GameObject ReadyButton;
-    public GameManagerBingo BingoManager;
+    public PhotonGameManagerBingo BingoManager;
     
     public string NotReadyText = "Please Fill All Tiles";
     public string PressReadyText = "Press Ready To begin";

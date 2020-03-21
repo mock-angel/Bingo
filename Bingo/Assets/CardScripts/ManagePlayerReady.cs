@@ -5,6 +5,6 @@ using UnityEngine;
 public class ManagePlayerReady : MonoBehaviour
 {
     public void OnReady(bool ready){
-        ClientPlayerScript.scriptInstance.ClientOnReady(ready);
+        PhotonPlayerScript.scriptInstance.ClientOnReady(ready);
     }
 }
