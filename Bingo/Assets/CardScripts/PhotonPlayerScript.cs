@@ -60,6 +60,8 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         scriptInstance = this;
         print("script instance assigned");
         ObjectAuthority = true;
+        
+        
     }
     
     void Update(){
@@ -76,13 +78,17 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
                          
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
         if(stream.IsWriting){
-            //stream.SendNext(transform.position);
+            stream.SendNext(playerName);
+            stream.SendNext(ready);
+            stream.SendNext(isTurn);
         }else{
-            // variable = (data) stream.RecieveNext();
+            playerName = (string) stream.ReceiveNext();
+            ready = (bool) stream.ReceiveNext();
+            isTurn = (bool) stream.ReceiveNext();
         }
     }
-    
-    
+
+
     
     
     
