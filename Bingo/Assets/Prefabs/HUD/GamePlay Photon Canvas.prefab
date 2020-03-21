@@ -517,8 +517,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: StartGame
+      - m_Target: {fileID: 3118642994044035197}
+        m_MethodName: RpcStartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -631,6 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayText: {fileID: 466696022025083758}
   ReadyButton: {fileID: 466696021825913028}
+  StartButton: {fileID: 466696022180627621}
   BingoManager: {fileID: 3118642994044035197}
   NotReadyText: Please Fill All Tiles
   PressReadyText: Press Ready To begin

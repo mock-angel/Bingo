@@ -11,7 +11,9 @@ using Photon.Realtime;
 public class photonSelectionButton : MonoBehaviourPunCallbacks
 {
     public TMP_InputField createRoomInput, joinRoomInput;
-    // Start is called before the first frame update
+    
+    public GameObject JoinRoomView;
+    public GameObject InRoomView;
     
     public void OnClickCreateRoom(){
         //Dont let player create room when name isnt set.
@@ -31,6 +33,25 @@ public class photonSelectionButton : MonoBehaviourPunCallbacks
     
     public override void OnJoinedRoom(){
         Debug.Log("We are connected to the room!");
-        menuLogic.OnChangeToRoom();
+        
+        JoinRoomView.SetActive(false);
+        InRoomView.SetActive(true);
+//        menuLogic.OnChangeToRoom();
+    }
+    public override void OnLeftRoom(){
+        Debug.Log("We left the room!");
+        
+        JoinRoomView.SetActive(true);
+        InRoomView.SetActive(false);
+//        menuLogic.OnChangeToRoom();
+    }
+    public void OnClickStartGame(){
+        if(PhotonNetwork.IsMasterClient){
+            PhotonNetwork.LoadLevel(1);
+        }
+    }
+    
+    public void OnClickLeaveRoom(){
+        PhotonNetwork.LeaveRoom();
     }
 }

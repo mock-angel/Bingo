@@ -10,7 +10,6 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     public bool devTesting = false;
     
     public static PhotonPlayerScript scriptInstance;
-//    public PhotonView photonView;
 //    public List<PlayerNetworkData> playerDataObj;
 //    [SyncVar]
     public string playerName = "Unnamed";
@@ -21,7 +20,7 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 //    [SyncVar]
     public bool ready;
     
-    bool ObjectAuthority = false;
+    public bool ObjectAuthority = false;
     
 //    [SyncVar]
     public bool isTurn = false;
@@ -30,8 +29,12 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     
 //    [SyncVar]
     public bool gameWon = false;
+    
+    public bool isServer = false;
 //    [SyncVar]
     public int winOrder = 0;
+    
+    private bool transformed = false;
     
 //    public override void OnStartLocalPlayer(){
 //        base.OnStartLocalPlayer();
@@ -44,12 +47,18 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 //        ObjectAuthority = true;
 //    }
     
-    public void Start(){
-        ChangeParent();
-    }
+//    public void Start(){
+//        ChangeParent();
+//    }
     
     public void ChangeParent(){
-        transform.parent = ConnectedPlayersStaticScript.instance.transform;
+        print("trying to set player");
+        if(gameObject != null)
+            if(gameObject.transform != null) {
+                gameObject.transform.parent = ConnectedPlayersStaticScript.instance.transform;
+                transformed = true;
+                print("Player Set");
+            }
     }
     
     public void StartLocalPlayer(){
@@ -65,6 +74,9 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     }
     
     void Update(){
+        
+        if(!transformed) ChangeParent();
+        
         if (photonView.IsMine || devTesting) {
             
             return;
@@ -77,14 +89,17 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     }
                          
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+    
         if(stream.IsWriting){
             stream.SendNext(playerName);
             stream.SendNext(ready);
             stream.SendNext(isTurn);
+            stream.SendNext(gameStarted);
         }else{
             playerName = (string) stream.ReceiveNext();
             ready = (bool) stream.ReceiveNext();
             isTurn = (bool) stream.ReceiveNext();
+            gameStarted = (bool) stream.ReceiveNext();
         }
     }
 

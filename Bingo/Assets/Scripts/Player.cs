@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 using MyAttributes;
+using Photon.Pun;
 
 public class Player : MonoBehaviour
 {
@@ -30,11 +31,19 @@ public class Player : MonoBehaviour
             DisplayName = data.DisplayName;
         else SavePlayer();
         
-        if(displayAsText) displayText.text = DisplayName;
+        if(displayAsText) {
+            displayText.text = DisplayName;
+        }
+        
+        PhotonNetwork.NickName = DisplayName;
     }
     
     public void UpdatePlayerName(){
-        if(displayAsText) DisplayName = displayText.text;
+        if(displayAsText) {
+            DisplayName = displayText.text;
+        }
+        
+        PhotonNetwork.NickName = DisplayName;
         SavePlayer();
     }
 }

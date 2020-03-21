@@ -13,6 +13,11 @@ public class photonConnect : MonoBehaviourPunCallbacks
     
     bool connectedToMaster = false;
     
+    void Start(){
+        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.GameVersion = MasterManager.GameSettings.GameVersion;
+        
+    }
     void Awake(){
         PhotonNetwork.ConnectUsingSettings();
         

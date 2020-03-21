@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 1296835331}
   - component: {fileID: 1296835330}
   - component: {fileID: 1296835329}
+  - component: {fileID: 1296835334}
   - component: {fileID: 1296835333}
   m_Layer: 5
   m_Name: PhotonRoomCanvas
@@ -457,6 +458,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 4329651693945109724, guid: 98e71bc30f078ea2b820e4576af01cca,
     type: 3}
+--- !u!114 &1296835334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296835328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!114 &4819088789035096172
 MonoBehaviour:
   m_ObjectHideFlags: 0

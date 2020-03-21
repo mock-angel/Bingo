@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Photon.Pun;
 //using Mirror;
 
-public class PhotonGameManagerBingo : MonoBehaviour
+[RequireComponent(typeof(PhotonView))]
+public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks
 {
     public static PhotonGameManagerBingo scriptInstance;
     public List<GameObject> Cards;
@@ -134,6 +135,7 @@ public class PhotonGameManagerBingo : MonoBehaviour
         return nextCardNum++;
     }
     
+    [PunRPC]
     public void RpcStartGame(){
         DestroyHorizontals();
         

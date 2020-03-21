@@ -18,6 +18,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         
         player.GetComponent<PhotonPlayerScript>().StartLocalPlayer();
         player.GetComponent<PhotonPlayerScript>().playerName = Player.instance.DisplayName;
+//        player.GetComponent<PhotonPlayerScript>().ChangeParent();
     }
     
     public override void OnDisconnected(DisconnectCause cause){

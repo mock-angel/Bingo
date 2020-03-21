@@ -47,7 +47,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 2
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: -4248512771198705798}
@@ -70,7 +70,9 @@ MonoBehaviour:
   playerName: 
   selfId: 0
   ready: 0
+  ObjectAuthority: 0
   isTurn: 0
   gameStarted: 0
   gameWon: 0
+  isServer: 0
   winOrder: 0
