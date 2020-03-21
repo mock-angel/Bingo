@@ -17,6 +17,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, playerPrefab.transform.rotation, 0);
         
         player.GetComponent<PhotonPlayerScript>().StartLocalPlayer();
+        player.GetComponent<PhotonPlayerScript>().playerName = Player.instance.DisplayName;
     }
     
     public override void OnDisconnected(DisconnectCause cause){
