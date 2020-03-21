@@ -11,6 +11,8 @@ public class CardNumGetter : MonoBehaviour
     public TextMeshProUGUI text;
     
     public void AssignCardNum(){
+        if(gameManagerBingo == null) gameManagerBingo = PhotonGameManagerBingo.scriptInstance;
+        
         int i = gameManagerBingo.getNextCardNumAndAssign(id);
         text.text = "" + i;
         

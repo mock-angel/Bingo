@@ -10,7 +10,7 @@ public class UpdateConnectedPlayersList : MonoBehaviour
     private GameObject AllPlayersObj;
     private TextMeshProUGUI connectedPlayersText;
 //    private int ChildCount = 0;
-    private bool isServer = false;
+//    private bool isServer = false;
     
     
     void Start(){
@@ -27,13 +27,13 @@ public class UpdateConnectedPlayersList : MonoBehaviour
         
         List<Transform> childrenList = AllPlayersObj.transform.Cast<Transform>().ToList();
         
-        if(childrenList.Count == 1){
-            //Assign this player as server.
-            isServer = true;
-            
-            //make player recognise itself as server.
-            PhotonPlayerScript.scriptInstance.isServer = true;
-        }
+//        if(childrenList.Count == 1){
+//            //Assign this player as server.
+//            isServer = true;
+//            
+//            //make player recognise itself as server.
+//            PhotonPlayerScript.scriptInstance.isServer = true;
+//        }
         
         Transform child;
         for(int i = 0; childrenList.Count > i; i++)
@@ -43,7 +43,7 @@ public class UpdateConnectedPlayersList : MonoBehaviour
             PhotonPlayerScript clientPlayerScript = child.gameObject.GetComponent<PhotonPlayerScript>();
             clientDisplayName = clientPlayerScript.playerName;
             
-            if(clientPlayerScript.gameStarted == true){
+            if(PhotonGameManagerBingo.scriptInstance.gameStarted == true){
                 if(clientPlayerScript.gameWon == true){
                     clientDisplayName += " (Won " + clientPlayerScript.winOrder + " )" ;
                 }

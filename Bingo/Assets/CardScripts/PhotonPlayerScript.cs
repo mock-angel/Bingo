@@ -25,8 +25,6 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 //    [SyncVar]
     public bool isTurn = false;
     
-    public bool gameStarted = false;
-    
 //    [SyncVar]
     public bool gameWon = false;
     
@@ -77,6 +75,11 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         
         if(!transformed) ChangeParent();
         
+//        if(!gameStarted){
+//            //Check if game started for any other player.
+//            if(PhotonGameManagerBingo.scriptInstance.)
+//        } 
+        
         if (photonView.IsMine || devTesting) {
             
             return;
@@ -94,16 +97,37 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(playerName);
             stream.SendNext(ready);
             stream.SendNext(isTurn);
-            stream.SendNext(gameStarted);
+//            stream.SendNext(gameStarted);
         }else{
             playerName = (string) stream.ReceiveNext();
             ready = (bool) stream.ReceiveNext();
             isTurn = (bool) stream.ReceiveNext();
-            gameStarted = (bool) stream.ReceiveNext();
+//            gameStarted = (bool) stream.ReceiveNext();
         }
     }
-
-
+    
+    //    [Command]
+    public void CmdTurnFinished(int numberSelected){
+        RpcTurnFinished(numberSelected);
+        ServerGameManagerScirpt.scriptInstance.TurnFinished(numberSelected);
+    }
+    
+    
+    //When start game.
+//    public void CmdStartGame(){
+//        PhotonView photonView = PhotonView.Get(this);
+//        gameStarted = true;
+//        photonView.RPC("RpcStartGame", RpcTarget.All);
+//    }
+//    
+//    [PunRPC]
+//    public void RpcStartGame(){
+////        gameStarted = true;
+////        if(ObjectAuthority == true){
+////            print("Authority start");
+////            PhotonGameManagerBingo.scriptInstance.RpcStartGame();
+////        }
+//    }
     
     
     
@@ -156,12 +180,6 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     }
     
 //    [Command]
-    public void CmdTurnFinished(int numberSelected){
-        RpcTurnFinished(numberSelected);
-        ServerGameManagerScirpt.scriptInstance.TurnFinished(numberSelected);
-    }
-    
-//    [Command]
     public void CmdGameWon(){
         if(gameWon) return;
         
@@ -179,15 +197,6 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         GameObject[] PlayerObjects = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < PlayerObjects.Length; i++){//GameObject singlePlayer in PlayerObjects){
             PlayerObjects[i].transform.parent = ConnectedPlayersStaticScript.instance.transform;
-        }
-    }
-    
-//    [ClientRpc]
-    public void RpcStartGame(){
-        gameStarted = true;
-        if(ObjectAuthority == true){
-            print("Authority start");
-            PhotonGameManagerBingo.scriptInstance.RpcStartGame();
         }
     }
 }

@@ -72,7 +72,6 @@ MonoBehaviour:
   ready: 0
   ObjectAuthority: 0
   isTurn: 0
-  gameStarted: 0
   gameWon: 0
   isServer: 0
   winOrder: 0

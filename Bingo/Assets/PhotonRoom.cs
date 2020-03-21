@@ -8,12 +8,15 @@ using Photon.Realtime;
 public class PhotonRoom : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
+    public GameObject gamePlayPrefab;
     
     public void Start(){
         spawnPlayer();
     }
     
     public void spawnPlayer(){
+        if(PhotonNetwork.IsMasterClient) PhotonNetwork.Instantiate(gamePlayPrefab.name, gamePlayPrefab.transform.position, gamePlayPrefab.transform.rotation, 0);
+        
         GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, playerPrefab.transform.rotation, 0);
         
         player.GetComponent<PhotonPlayerScript>().StartLocalPlayer();

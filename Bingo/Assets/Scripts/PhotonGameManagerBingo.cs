@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
 //using Mirror;
 
 [RequireComponent(typeof(PhotonView))]
-public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks
+public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
 {
     public static PhotonGameManagerBingo scriptInstance;
     public List<GameObject> Cards;
@@ -36,6 +37,9 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks
     
     private GameObject BingoHorizontal;
     private List<GameObject> bingoCardList;
+    
+    public bool gameStarted = false;
+    
     void Start(){
         horizontalsList = new List<GameObject>();
         idLocation = new List<int>();
@@ -135,6 +139,15 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks
         return nextCardNum++;
     }
     
+    //must be called only be master client.
+    public void CmdStartGame(){
+        gameStarted = true;
+        PhotonView photonView = PhotonView.Get(this);
+        PhotonPlayerScript.scriptInstance.isTurn = true;
+        photonView.RPC("RpcStartGame", RpcTarget.All);
+        
+    }
+    
     [PunRPC]
     public void RpcStartGame(){
         DestroyHorizontals();
@@ -204,7 +217,8 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks
     
     void FixedUpdate(){
         
-        if(PhotonPlayerScript.scriptInstance.gameStarted == false) return; 
+        if(gameStarted == false) return; 
+        
         if(PhotonPlayerScript.scriptInstance.isTurn == true){
             if(gamePlayEnabled == true){
                 return;
@@ -285,6 +299,16 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks
         if(bingoCount == 5) PhotonPlayerScript.scriptInstance.CmdGameWon();
         
 //        print("Bingo count is: " + bingoCount);
+    }
+    
+    
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+    
+        if(stream.IsWriting){
+            stream.SendNext(gameStarted);
+        }else{
+            gameStarted = (bool) stream.ReceiveNext();
+        }
     }
 }
 
