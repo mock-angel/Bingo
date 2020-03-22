@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: f96287b740daa23fe8a25dca7138444c
   - enabled: 1
+    path: Assets/Scenes/PhotonScene.unity
+    guid: 8e2e4092557d37ff4b1c93d431382acd
+  - enabled: 1
+    path: Assets/Scenes/PhotonRoomLoaded.unity
+    guid: 63cae400d7e4538f58b0357df2bf73a4
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: be58af9d19a15fff2a4f9560810b5f0c
   m_configObjects: {}

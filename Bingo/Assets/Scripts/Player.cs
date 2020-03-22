@@ -4,13 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using MyAttributes;
+using Photon.Pun;
 
 public class Player : MonoBehaviour
 {
     public string DisplayName;
     public static Player instance;
     
-    public TextMeshProUGUI displayText;
+    public bool displayAsText;
+    [ConditionalField("displayAsText")]
+    public TMP_InputField displayText;
     
     public void Start(){
         instance = this;
@@ -27,11 +31,19 @@ public class Player : MonoBehaviour
             DisplayName = data.DisplayName;
         else SavePlayer();
         
-        displayText.text = DisplayName;
+        if(displayAsText) {
+            displayText.text = DisplayName;
+        }
+        
+        PhotonNetwork.NickName = DisplayName;
     }
     
     public void UpdatePlayerName(){
-        DisplayName = displayText.text;
+        if(displayAsText) {
+            DisplayName = displayText.text;
+        }
+        
+        PhotonNetwork.NickName = DisplayName;
         SavePlayer();
     }
 }

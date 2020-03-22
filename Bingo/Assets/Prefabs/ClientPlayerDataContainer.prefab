@@ -63,3 +63,8 @@ MonoBehaviour:
   syncInterval: 0.1
   playerName: 
   selfId: 0
+  ready: 0
+  isTurn: 0
+  gameStarted: 0
+  gameWon: 0
+  winOrder: 0
