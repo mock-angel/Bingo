@@ -14,6 +14,12 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         spawnPlayer();
     }
     
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
+    }
+    
     public void spawnPlayer(){
         if(PhotonNetwork.IsMasterClient) PhotonNetwork.Instantiate(gamePlayPrefab.name, gamePlayPrefab.transform.position, gamePlayPrefab.transform.rotation, 0);
         

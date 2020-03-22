@@ -99,7 +99,6 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if(otherPhotonPlayerScripts[i].isTurn){
                     mostCurrentTurnSciptInstance = otherPhotonPlayerScripts[i];
-                    print("Found a player with isTurn == true");
                     break;
                 }
             }
@@ -121,7 +120,6 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 //                    isTurn = true;
 //                }
                 currentTurnScriptInstance = mostCurrentTurnSciptInstance;
-                print("currentTurnScriptInstance was null, tried to correct that.");
             }
             else if (currentTurnScriptInstance != mostCurrentTurnSciptInstance){
                 //TODO: Run this script only if others turn Finished?
@@ -136,7 +134,6 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 //                    
 //                }
 //                if(mostCurrentTurnSciptInstance == null){
-                    print("Compare two ids :"+PhotonPlayerScript.scriptInstance.selfId +", "+ currentTurnScriptInstance.nextPlayerid);
                     if (PhotonPlayerScript.scriptInstance.selfId == currentTurnScriptInstance.nextPlayerid){
                         PhotonPlayerScript.scriptInstance.isTurn = true;
                         mostCurrentTurnSciptInstance = this;
@@ -171,6 +168,8 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(isTurn);
             stream.SendNext(selfId);
             stream.SendNext(nextPlayerid);
+            stream.SendNext(gameWon);
+            stream.SendNext(winOrder);
         }else{
             playerName = (string) stream.ReceiveNext();
             thisTurnNumberSelected = (int) stream.ReceiveNext();
@@ -178,6 +177,8 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             isTurn = (bool) stream.ReceiveNext();
             selfId = (int) stream.ReceiveNext();
             nextPlayerid = (int) stream.ReceiveNext();
+            gameWon = (bool) stream.ReceiveNext();
+            winOrder = (int) stream.ReceiveNext();
         }
     }
     
@@ -272,7 +273,19 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         if(gameWon) return;
         
         gameWon = true;
-        winOrder = ++ServerGameManagerScirpt.scriptInstance.winnersCount;
+//        winOrder = ServerGameManagerScirpt.scriptInstance.winnersCount + 1;
+        
+        List<PhotonPlayerScript> otherPhotonPlayerScripts = AllPlayersObj.GetComponentsInChildren<PhotonPlayerScript>().ToList();;    
+        
+        int gameWonCount = 0;
+        for(int i = 0; i < otherPhotonPlayerScripts.Count; i++)
+        {
+            if(otherPhotonPlayerScripts[i].gameWon){
+                gameWonCount += 1;
+            }
+        }
+        
+        winOrder = gameWonCount;
     }
     
 //    [ClientRpc]

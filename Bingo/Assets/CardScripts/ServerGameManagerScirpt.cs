@@ -33,6 +33,8 @@ public class ServerGameManagerScirpt : MonoBehaviour
     
     public void TurnFinished(int numberSelectedDuringTurn){
         
+        
+        
         //Need to move all code away from this function into PlayerScript for consistency.
         return;
         
@@ -77,6 +79,18 @@ public class ServerGameManagerScirpt : MonoBehaviour
     void FixedUpdate()
     {
         if(PhotonGameManagerBingo.scriptInstance.gameStarted) return;
+        
+        winnersCount = 0;
+        if(AllPlayersObj == null) AllPlayersObj = ConnectedPlayersStaticScript.instance;
+        foreach (Transform child in AllPlayersObj.transform)
+        {
+            PhotonPlayerScript clientPlayerScript = child.gameObject.GetComponent<PhotonPlayerScript>();
+            print("Updating count");
+            if(clientPlayerScript.gameWon){
+                winnersCount += 1;
+            }
+            
+        }
         
         //Assume everyone's ready
         bool everyOneReady = true;
