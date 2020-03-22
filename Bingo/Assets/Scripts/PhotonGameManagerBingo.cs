@@ -40,6 +40,8 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
     
     public bool gameStarted = false;
     
+//    public int turnChosenValue = 0;
+    
     void Start(){
         horizontalsList = new List<GameObject>();
         idLocation = new List<int>();
@@ -202,7 +204,7 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
 //        PhotonPlayerScript.scriptInstance.isTurn = false;
     }
     
-    public void TurnFinished(int numberSelected){
+    public void OtherPlayersTurnFinished(int numberSelected){
         Cards[idLocation.IndexOf(numberSelected)].GetComponent<Button>().interactable = false;
         
         //This is done fo convinence in BINGO checking.

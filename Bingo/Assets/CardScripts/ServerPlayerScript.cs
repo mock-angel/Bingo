@@ -5,7 +5,7 @@ using Mirror;
 public class ServerPlayerScript : NetworkBehaviour
 {
     public static ServerPlayerScript instance;
-    public List<ClientPlayerScript> ClientPlayerList;
+//    public List<ClientPlayerScript> ClientPlayerList;
     
     int connectedIds = 0;
     

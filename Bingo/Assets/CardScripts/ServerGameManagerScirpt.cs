@@ -33,6 +33,9 @@ public class ServerGameManagerScirpt : MonoBehaviour
     
     public void TurnFinished(int numberSelectedDuringTurn){
         
+        //Need to move all code away from this function into PlayerScript for consistency.
+        return;
+        
         bool turnPlayerDetected = false;
         print("Tick validity");
         

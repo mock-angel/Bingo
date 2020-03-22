@@ -75,3 +75,6 @@ MonoBehaviour:
   gameWon: 0
   isServer: 0
   winOrder: 0
+  AllPlayersObj: {fileID: 0}
+  thisTurnNumberSelected: 0
+  currentTurnScriptInstance: {fileID: 0}
