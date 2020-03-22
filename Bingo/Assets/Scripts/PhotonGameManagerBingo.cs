@@ -205,6 +205,12 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
     }
     
     public void OtherPlayersTurnFinished(int numberSelected){
+        if(numberSelected <1 || numberSelected>25) return;
+        
+        
+        print("numberSelected : " +numberSelected);
+        
+        if(idLocation.IndexOf(numberSelected) == -1) return;
         Cards[idLocation.IndexOf(numberSelected)].GetComponent<Button>().interactable = false;
         
         //This is done fo convinence in BINGO checking.

@@ -35,7 +35,6 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     
     private bool transformed = false;
     
-    
     public GameObject AllPlayersObj;
 //    public override void OnStartLocalPlayer(){
 //        base.OnStartLocalPlayer();
@@ -54,6 +53,8 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     
     public int thisTurnNumberSelected = 0;
     public PhotonPlayerScript currentTurnScriptInstance = null;
+    
+    public int nextPlayerid = 0;
     
     public void ChangeParent(){
         print("trying to set player");
@@ -75,6 +76,8 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         ObjectAuthority = true;
         
         selfId = PhotonNetwork.LocalPlayer.ActorNumber;
+        
+        nextPlayerid = PhotonNetwork.LocalPlayer.GetNext().ActorNumber;
     }
     
     void Update(){
@@ -83,12 +86,14 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         
         if(AllPlayersObj == null) AllPlayersObj = ConnectedPlayersStaticScript.instance;
         
+        if(!ObjectAuthority) return;
+        
         //Find who has the turn...
         PhotonPlayerScript mostCurrentTurnSciptInstance = null;
         
         //Assign mostCurrentTurnSciptInstance.
         {
-            List<PhotonPlayerScript> otherPhotonPlayerScripts = GetComponentsInChildren<PhotonPlayerScript>().OfType<PhotonPlayerScript>().ToList();;    
+            List<PhotonPlayerScript> otherPhotonPlayerScripts = AllPlayersObj.GetComponentsInChildren<PhotonPlayerScript>().ToList();;    
             
             for(int i = 0; i < otherPhotonPlayerScripts.Count; i++)
             {
@@ -127,11 +132,21 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
                 //First check if the number is updated. Return if not.
 //                if(currentTurnScriptInstance.thisTurnNumberSelected == 0) return;
                 
+//                if(mostCurrentTurnSciptInstance == null && PhotonNetwork.LocalPlayer.ActorNumber == mostCurrentTurnSciptInstance.id){
+//                    
+//                }
+//                if(mostCurrentTurnSciptInstance == null){
+                    print("Compare two ids :"+PhotonPlayerScript.scriptInstance.selfId +", "+ currentTurnScriptInstance.nextPlayerid);
+                    if (PhotonPlayerScript.scriptInstance.selfId == currentTurnScriptInstance.nextPlayerid){
+                        PhotonPlayerScript.scriptInstance.isTurn = true;
+                        mostCurrentTurnSciptInstance = this;
+                    }
+//                }
                 //Update Cards now.
                 PhotonGameManagerBingo. scriptInstance.OtherPlayersTurnFinished(currentTurnScriptInstance.thisTurnNumberSelected);
                 
-                //Now we know whose turn is next.
-                currentTurnScriptInstance = mostCurrentTurnSciptInstance;
+                //Now we know whose current turn.
+                if(mostCurrentTurnSciptInstance!= null) currentTurnScriptInstance = mostCurrentTurnSciptInstance;
                 print("Updating cards now.");
             }
             
@@ -140,10 +155,9 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine || devTesting) {
             
             return;
-            
         }
         else{
-        
+            
         }
     
     }
@@ -156,12 +170,14 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(ready);
             stream.SendNext(isTurn);
             stream.SendNext(selfId);
+            stream.SendNext(nextPlayerid);
         }else{
             playerName = (string) stream.ReceiveNext();
             thisTurnNumberSelected = (int) stream.ReceiveNext();
             ready = (bool) stream.ReceiveNext();
             isTurn = (bool) stream.ReceiveNext();
             selfId = (int) stream.ReceiveNext();
+            nextPlayerid = (int) stream.ReceiveNext();
         }
     }
     
@@ -169,11 +185,22 @@ public class PhotonPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     public void CmdTurnFinished(int numberSelected){
         isTurn = false;
         thisTurnNumberSelected = numberSelected;
+        
+        if(PhotonNetwork.LocalPlayer.GetNext() != null)
+            nextPlayerid = PhotonNetwork.LocalPlayer.GetNext().ActorNumber;
+        else nextPlayerid = selfId;
+        
+//        RpcTurnFinished();
 //        RpcTurnFinished(numberSelected);
 //        ServerGameManagerScirpt.scriptInstance.TurnFinished(numberSelected);
     }
-    
-    
+//    [PunRPC]
+//    public void RpcTurnFinished(){
+//        print("next id = " + nextPlayerid);
+//        if (PhotonPlayerScript.scriptInstance.selfId == nextPlayerid){
+//            PhotonPlayerScript.scriptInstance.isTurn = true;
+//        }
+//    }
     //When start game.
 //    public void CmdStartGame(){
 //        PhotonView photonView = PhotonView.Get(this);
