@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 
-
 public class UpdateConnectedPlayersList : MonoBehaviour
 {
     private GameObject AllPlayersObj;

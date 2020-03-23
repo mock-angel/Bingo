@@ -30,8 +30,15 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 //        player.GetComponent<PhotonPlayerScript>().ChangeParent();
     }
     
+    public void OnClickLeaveRoom(){
+        PhotonNetwork.LeaveRoom();
+    }
+    
+    public override void OnLeftRoom(){
+        menuLogic.OnChangeToLobby();
+    }
+    
     public override void OnDisconnected(DisconnectCause cause){
         menuLogic.OnChangeToLobby();
-        print("Disconnected from photon, must start over.");
     }
 }
