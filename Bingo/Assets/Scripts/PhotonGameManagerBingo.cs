@@ -10,13 +10,14 @@ using Photon.Realtime;
 public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
 {
     public static PhotonGameManagerBingo scriptInstance;
+    
+    //Created list of cards.
     public List<GameObject> Cards;
     
+    //Prefabs for game.
     public GameObject BingoCardPrefab;
     public GameObject CardPrefab;
     public GameObject EmptyCardPrefab;
-    public int current;
-    
     public GameObject GamePanelObject;
     public GameObject Horizontals;
     
@@ -40,8 +41,6 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
     
     public bool gameStarted = false;
     
-//    public int turnChosenValue = 0;
-    
     void Start(){
         horizontalsList = new List<GameObject>();
         idLocation = new List<int>();
@@ -51,14 +50,6 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
         CreateEmptyCards();
         scriptInstance = this;
     }
-    
-//    void OnEnable()
-//    {
-////        horizontalsList = new List<GameObject>();
-////        idLocation = new List<int>();
-////        Cards = new List<GameObject>();
-//        CreateEmptyCards();
-//    }
     
     public void DestroyHorizontals(){
         for(int i = 0; i < Cards.Count; i++){
@@ -79,8 +70,6 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
         //Reset all list elements.
         idLocation = new List<int>();
         idLocation.Clear();
-        
-//        print("Reached break point");
         
         //Add 25 zeroes to idLocation.
         for (int i = 0; i < 25; i++){
@@ -176,7 +165,6 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
                 card.GetComponent<CardNumPlayer>().gameManagerBingo = this;
                 card.GetComponent<CardNumPlayer>().ApplyText();
                 card.GetComponent<Button>().onClick.AddListener ( delegate { Tick(card, card.GetComponent<CardNumPlayer>().id); });
-//                card.GetComponent<Button>().interactable = false;
                 Cards.Add(card);
             }
         }
@@ -198,10 +186,6 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
         gamePlayEnabled = false;
         
         PhotonPlayerScript.scriptInstance.CmdTurnFinished(id);
-        
-//        idLocation[idLocation.IndexOf(id)] = 0;
-        //The below line might be a fix, but might break system.
-//        PhotonPlayerScript.scriptInstance.isTurn = false;
     }
     
     public void OtherPlayersTurnFinished(int numberSelected){
@@ -232,6 +216,7 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
                 return;
             }
             else{
+            
                 //Enable gameplay.
                 SetGamePlayEnable(true);
                 gamePlayEnabled = true;
@@ -263,7 +248,7 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
             }
             if(flag == true) bingoCount++;
         }
-//        string stringDeb = "";
+        
         for (int i = 0; i < 5; i++){
             flag = true;
             for(int j = i*5; j < (5 + i*5); j++){
@@ -274,8 +259,7 @@ public class PhotonGameManagerBingo : MonoBehaviourPunCallbacks, IPunObservable
             }
             if(flag == true) bingoCount++;
         }
-//        print(stringDeb);
-//        
+        
 //        //Check diagonal
         flag = true;
         for (int i = 0; i < 5; i++){

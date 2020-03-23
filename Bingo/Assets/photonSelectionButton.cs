@@ -36,14 +36,12 @@ public class photonSelectionButton : MonoBehaviourPunCallbacks
         
         JoinRoomView.SetActive(false);
         InRoomView.SetActive(true);
-//        menuLogic.OnChangeToRoom();
     }
     public override void OnLeftRoom(){
         Debug.Log("We left the room!");
         
         JoinRoomView.SetActive(true);
         InRoomView.SetActive(false);
-//        menuLogic.OnChangeToRoom();
     }
     public void OnClickStartGame(){
         if(PhotonNetwork.IsMasterClient){

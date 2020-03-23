@@ -20,32 +20,15 @@ public class DisplayContentManager : MonoBehaviour
         scriptInstance = this;
     }
     
-    
-    public void OnReadyPress(){
-        ReadyButton.GetComponent<Button>().interactable = false;
-        
-//        if(PhotonNetwork.IsMasterClient)
-//            StartButton.SetActive(true);
-//        else
-//            StartButton.SetActive(false);
-    }
-    
     void FixedUpdate(){
-        
+        //Updates instruction text at the top.
         if(scriptInstance == null)  scriptInstance = this;
         
         if(BingoManager.isReady() == false){
             DisplayText.text = NotReadyText;
-            ReadyButton.GetComponent<Button>().interactable = false;
-            
         }
         else {
             DisplayText.text = PressReadyText;
-//            if(PhotonPlayerScript.scriptInstance.gameStarted)
-//                StartButton.SetActive(false);
-            //TODO: Moved to GameManagerBingo, is it an effecient method?
-//            ReadyButton.GetComponent<Button>().interactable = true;
         }
-        //else()
     }
 }
