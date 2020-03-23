@@ -9,13 +9,8 @@ public class UpdateConnectedPlayersList : MonoBehaviour
 {
     private GameObject AllPlayersObj;
     private TextMeshProUGUI connectedPlayersText;
-//    private int ChildCount = 0;
-//    private bool isServer = false;
-    
     
     void Start(){
-        if(ConnectedPlayersStaticScript.instance != null)
-            AllPlayersObj = ConnectedPlayersStaticScript.instance.gameObject;
         connectedPlayersText = gameObject.GetComponent<TextMeshProUGUI>();
     }
     
@@ -23,45 +18,37 @@ public class UpdateConnectedPlayersList : MonoBehaviour
     {
         if(AllPlayersObj == null)
             AllPlayersObj = ConnectedPlayersStaticScript.instance.gameObject;
+        
         string connectedListString = "";
         
         List<Transform> childrenList = AllPlayersObj.transform.Cast<Transform>().ToList();
-        
-//        if(childrenList.Count == 1){
-//            //Assign this player as server.
-//            isServer = true;
-//            
-//            //make player recognise itself as server.
-//            PhotonPlayerScript.scriptInstance.isServer = true;
-//        }
         
         Transform child;
         for(int i = 0; childrenList.Count > i; i++)
         {   
             child = childrenList[i];
-            string clientDisplayName;
             PhotonPlayerScript clientPlayerScript = child.gameObject.GetComponent<PhotonPlayerScript>();
-            clientDisplayName = clientPlayerScript.playerName;
             
+            string clientDisplayName = clientPlayerScript.playerName;
+            
+            //If game started, get from PhotonGameManagerBingo.
             if(PhotonGameManagerBingo.scriptInstance.gameStarted == true){
-                if(clientPlayerScript.gameWon == true){
+                //Do something if player won game.
+                if(clientPlayerScript.gameWon == true)
                     clientDisplayName += " (Won " + clientPlayerScript.winOrder + " )" ;
-                }
+                
+                //If this player yet to win, do somethign if its turn.
                 else if (clientPlayerScript.isTurn) clientDisplayName += " (Current Turn)";
             }
-            else{
-                if (clientPlayerScript.ready) clientDisplayName += " (Ready)";
-            }
+            
+            //If still in selection round, check if player ready.
+            else if (clientPlayerScript.ready) clientDisplayName += " (Ready)";
             
             clientDisplayName += "\n";
             connectedListString += clientDisplayName;
         }
         
+        //Set the player display list text.
         connectedPlayersText.text = connectedListString;
-        
-//        for (int i = 0; i < children; i++){
-//            ClientPlayerScript clientPlayerScript = transform.GetChild(i).gameObject.GetComponent<ClientPlayerScript>();
-//            connectedList += clientPlayerScript.playerName + "\n";
-//        }
     }
 }

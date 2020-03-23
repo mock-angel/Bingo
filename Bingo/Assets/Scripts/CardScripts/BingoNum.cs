@@ -6,6 +6,5 @@ using TMPro;
 
 public class BingoNum : MonoBehaviour
 {
-//    public PhotonGameManagerBingo gameManagerBingo;
     public TextMeshProUGUI text;
 }

@@ -63,19 +63,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4329651693945109724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aef859e250b4dd9598aaf50225b4c905, type: 3}
+  m_Script: {fileID: 11500000, guid: 3873e36a870a642539ce6bd62d506034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devTesting: 0
   playerName: 
   selfId: 0
   ready: 0
-  ObjectAuthority: 0
   isTurn: 0
   gameWon: 0
-  isServer: 0
   winOrder: 0
-  AllPlayersObj: {fileID: 0}
-  thisTurnNumberSelected: 0
-  currentTurnScriptInstance: {fileID: 0}
   nextPlayerid: 0

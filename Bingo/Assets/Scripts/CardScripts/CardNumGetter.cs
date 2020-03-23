@@ -15,7 +15,5 @@ public class CardNumGetter : MonoBehaviour
         
         int i = gameManagerBingo.getNextCardNumAndAssign(id);
         text.text = "" + i;
-        
-        //Also disable this button, but prolly do it in OnClick;
     }
 }

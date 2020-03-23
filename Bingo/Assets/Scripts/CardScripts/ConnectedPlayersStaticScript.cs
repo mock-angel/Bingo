@@ -5,6 +5,7 @@ using UnityEngine;
 public class ConnectedPlayersStaticScript : MonoBehaviour
 {
     public static GameObject instance;
+    
     void Start()
     {
         instance = gameObject;

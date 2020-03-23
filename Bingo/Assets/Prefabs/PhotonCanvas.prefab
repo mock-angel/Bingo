@@ -368,7 +368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9041682816661643970}
-  - component: {fileID: 6031946286793676441}
+  - component: {fileID: 284452000707057927}
   m_Layer: 0
   m_Name: PlayerDataOBJ
   m_TagString: Untagged
@@ -390,7 +390,7 @@ Transform:
   m_Father: {fileID: 2163180067826708092}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6031946286793676441
+--- !u!114 &284452000707057927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1928792723674763088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca590502445ccdf79a880424e28feda, type: 3}
+  m_Script: {fileID: 11500000, guid: e10a3d41c9781f3758b2df9adf386aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: 
@@ -3726,7 +3726,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6031946286793676441}
+      - m_Target: {fileID: 0}
         m_MethodName: UpdatePlayerName
         m_Mode: 1
         m_Arguments:
